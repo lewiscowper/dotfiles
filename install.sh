@@ -28,7 +28,7 @@ if test "$(which brew)"
 then
   fancy_echo "Updating Homebrew formulae"
   brew update --force # https://github.com/Homebrew/brew/issues/1151
-  brew bundle --file=mac/.Brewfile
+  brew bundle
 fi
 
 # Do postinstall install of fzf

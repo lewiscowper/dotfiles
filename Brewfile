@@ -85,10 +85,10 @@ brew "zsh-syntax-highlighting"
 
 cask "1password"
 cask "alfred"
-cask "font-firacode-nerd-font-mono"
 cask "docker-edge"
 cask "firefox"
 cask "firefoxnightly"
+cask "font-firacode-nerd-font-mono"
 cask "gnucash"
 cask "google-chrome"
 cask "google-chrome-canary"
@@ -112,6 +112,6 @@ mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Sip", id: 507257563
-mas "Telegram", id: 747648890
+# mas "Telegram", id: 747648890
 mas "TweetDeck", id: 485812721
 mas "Xcode", id: 497799835
