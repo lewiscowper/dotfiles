@@ -2,7 +2,6 @@ cask_args appdir: "~/Applications", fontdir: "~/Library/Fonts"
 
 tap "buo/cask-upgrade"
 tap "caskroom/cask"
-tap "caskroom/fonts"
 tap "caskroom/versions"
 tap "crisidev/chunkwm"
 tap "homebrew/bundle"
@@ -88,9 +87,9 @@ brew "zsh-syntax-highlighting"
 
 # cask "1password"
 cask "alfred"
+cask "dash"
 cask "docker"
 cask "firefox"
-cask "font-fira-code"
 cask "gnucash"
 cask "google-chrome"
 cask "iterm2"
@@ -99,7 +98,7 @@ cask "minikube"
 cask "monolingual"
 cask "slack"
 cask "steam"
-# cask "telegram"
+cask "telegram"
 cask "vagrant"
 cask "viber"
 cask "vimr"
@@ -112,6 +111,5 @@ mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Sip", id: 507257563
-# mas "Telegram", id: 747648890
 mas "TweetDeck", id: 485812721
 mas "Xcode", id: 497799835

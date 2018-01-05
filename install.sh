@@ -29,11 +29,8 @@ then
   fancy_echo "Updating Homebrew formulae"
   brew update --force # https://github.com/Homebrew/brew/issues/1151
   brew bundle
+  ./brew-fonts.sh
 fi
-
-# Do postinstall install of fzf
-fancy_echo "fzf post install stuff"
-$(brew --prefix)/opt/fzf/install --no-update-rc --completion --key-bindings
 
 update_shell() {
   local shell_path;
