@@ -42,6 +42,7 @@ brew "hub"
 brew "iftop"
 brew "jq"
 brew "jrnl"
+brew "kubernetes-cli"
 brew "less"
 brew "libsodium"
 brew "libuv", args: ["HEAD"]
@@ -57,6 +58,7 @@ brew "neofetch"
 brew "neomutt/neomutt/neomutt", args: ["with-gpgme", "with-libidn", "with-notmuch-patch", "with-s-lang"]
 brew "neovim"
 brew "nmap"
+brew "node"
 brew "openssl"
 brew "pass"
 brew "phrase/brewed/phraseapp"
@@ -66,6 +68,7 @@ brew "python"
 brew "python3"
 brew "rsync"
 brew "sl"
+brew "stow"
 brew "sudolikeaboss"
 brew "thefuck"
 brew "tldr"
@@ -83,7 +86,7 @@ brew "zsh"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
-cask "1password"
+# cask "1password"
 cask "alfred"
 cask "docker"
 cask "firefox"
@@ -96,7 +99,7 @@ cask "minikube"
 cask "monolingual"
 cask "slack"
 cask "steam"
-cask "telegram"
+# cask "telegram"
 cask "vagrant"
 cask "viber"
 cask "vimr"
@@ -104,9 +107,7 @@ cask "virtualbox"
 cask "virtualbox-extension-pack"
 cask "viscosity"
 
-mas "Airmail 3", id: 918858936
 mas "Deckset", id: 847496013
-mas "GIFs", id: 961850017
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541

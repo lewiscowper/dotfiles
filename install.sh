@@ -107,7 +107,7 @@ fi
 if test "$(which n)"
 then
   fancy_echo "Installing latest LTS version of node"
-  n lts
+  N_PREFIX=~/bin n lts
 fi
 
 fancy_echo "Ending install script"
