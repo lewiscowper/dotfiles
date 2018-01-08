@@ -471,3 +471,5 @@ endif
 set backupdir=~/.config/nvim/tmp/
 set directory=~/.config/nvim/tmp/
 
+" Turn off command logging to external file
+set viminfo=
