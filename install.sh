@@ -65,10 +65,6 @@ if [ ! -d "$HOME/dev/" ]; then
   mkdir "$HOME/dev"
 fi
 
-if [ ! -d "$HOME/screensaver/" ]; then
-  mkdir "$HOME/screensaver"
-fi
-
 if [ ! -d "$HOME/talks/" ]; then
   mkdir "$HOME/talks"
 fi
