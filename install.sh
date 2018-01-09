@@ -103,6 +103,9 @@ then
   N_PREFIX=~/bin n lts
 fi
 
+fancy_echo "Disabling desktop icons"
+defaults write com.apple.finder CreateDesktop -bool FALSE; killall Finder
+
 fancy_echo "Ending install script"
 
 exit 0
