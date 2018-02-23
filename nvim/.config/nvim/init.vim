@@ -21,6 +21,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'mxw/vim-jsx'
   " JSON
   Plug 'leshill/vim-json'
+  " Styled Components
+  Plug 'styled-components/vim-styled-components'
   " Golang plugin adding tons of fun options
   Plug 'fatih/vim-go'
   " Editorconfig
@@ -209,21 +211,6 @@ set statusline +=\ %{GitStatus()}
 " Add linter errors
 set statusline +=\ %{LinterStatus()}
 
-"      ___           ___                         ___           ___           ___           ___
-"     /  /\         /  /\          ___          /  /\         /  /\         /  /\         /  /\
-"    /  /::\       /  /:/         /__/\        /  /::\       /  /::\       /  /::|       /  /::\
-"   /  /:/\:\     /  /:/          \  \:\      /  /:/\:\     /  /:/\:\     /  /:|:|      /  /:/\:\
-"  /  /::\ \:\   /  /:/            \__\:\    /  /:/  \:\   /  /:/  \:\   /  /:/|:|__   /  /:/  \:\
-" /__/:/\:\_\:\ /__/:/     /\      /  /::\  /__/:/ \__\:\ /__/:/ \  \:\ /__/:/_|::::\ /__/:/ \__\:|
-" \__\/  \:\/:/ \  \:\    /:/     /  /:/\:\ \  \:\ /  /:/ \  \:\  \__\/ \__\/  /~~/:/ \  \:\ /  /:/
-"      \__\::/   \  \:\  /:/     /  /:/__\/  \  \:\  /:/   \  \:\             /  /:/   \  \:\  /:/
-"      /  /:/     \  \:\/:/     /__/:/        \  \:\/:/     \  \:\           /  /:/     \  \:\/:/
-"     /__/:/       \  \::/      \__\/          \  \::/       \  \:\         /__/:/       \__\::/
-"     \__\/         \__\/                       \__\/         \__\/         \__\/            ~~
-
-" Allow vim to edit crontab properly
-autocmd filetype crontab setlocal nobackup nowritebackup
-
 "      ___           ___                         ___
 "     /  /\         /  /\          __           /  /\
 "    /  /:/        /  /::\        |  |\        /  /::\
@@ -396,6 +383,7 @@ set smartindent
 
 " Set indent characters up to two spaces
 set expandtab
+set tabstop =2
 set softtabstop =2
 set shiftwidth =2
 

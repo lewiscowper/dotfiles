@@ -1,5 +1,5 @@
 # Change location of zsh completion dump file
-COMPDUMPFILE="$HOME/.etc/zcompdump"
+COMPDUMPFILE="$XDG_DATA_HOME/zsh/zcompdump"
 
 autoload -Uz compinit
 if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' $COMPDUMPFILE) ]; then

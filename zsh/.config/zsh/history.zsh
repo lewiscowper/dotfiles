@@ -1,3 +1,3 @@
-HISTFILE=~/.config/.zsh-history;
+HISTFILE=$XDG_CACHE_DIR/zsh/zsh-history;
 HISTSIZE=10000
 SAVEHIST=10000

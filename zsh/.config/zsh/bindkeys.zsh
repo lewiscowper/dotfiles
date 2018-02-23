@@ -9,7 +9,7 @@ bindkey "^F"      forward-char                         # ctrl-f
 bindkey "^B"      backward-char                        # ctrl-b
 bindkey -s "^G"   'git status^M'                       # ctrl-g
 bindkey -s "^W"   'cd ~/dev/moneymap/web-app^M'        # ctrl-w
-bindkey -s "^O"   'cd ~/dev/moneymap/operations-tools^M'        # ctrl-w
+bindkey -s "^O"   'cd ~/dev/moneymap/ops-tool^M'        # ctrl-w
 bindkey -s "^Mc"  'git checkout -b MMP-'               # ctrl-m-c
 
 bindkey -v # Default to standard vi bindings, regardless of editor string

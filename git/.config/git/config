@@ -1,6 +1,6 @@
 [user]
-  email = lewis.cowper@googlemail.com
-  name = Lewis Cowper
+	email = lewis.cowper@googlemail.com
+	name = Lewis Cowper
 
 [editor]
   editor = nvim
@@ -69,7 +69,7 @@
 
 [commit]
 [core]
-  excludesfile = /Users/lewis/.gitignore_global
+	excludesfile = /Users/lewis/.config/git/globalignore
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path =
@@ -89,5 +89,7 @@
   newNormal = green bold
   newHighlight = green bold 22
 [merge "npm-merge-driver"]
-  name = automatically merge npm lockfiles
-  driver = npx npm-merge-driver merge %A %O %B %P
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P
+[github]
+	user = lewiscowper

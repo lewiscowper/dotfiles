@@ -4,7 +4,7 @@ autoload -Uz vcs_info
 
 _newline=$'\n'
 branch_name="${PR_BOLD_WHITE}%b%f"
-prompt_symbol="||>"
+prompt_symbol="|>"
 
 zstyle ':vcs_info:*' stagedstr '${PR_GREEN}•'
 zstyle ':vcs_info:*' unstagedstr '${PR_YELLOW}•'

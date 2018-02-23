@@ -28,8 +28,12 @@ if test "$(which brew)"
 then
   fancy_echo "Updating Homebrew formulae"
   brew update --force # https://github.com/Homebrew/brew/issues/1151
-  brew bundle
-  ./brew-fonts.sh
+fi
+
+if test "$(brew bundle check >/dev/null 2>&1)"
+then
+  fancy_echo "Installing specified formulae"
+  brew bundle --file=~/dotfiles/Brewfile
 fi
 
 update_shell() {
@@ -76,11 +80,11 @@ fi
 if test "$(which stow)"
 then
   fancy_echo "Symlinking dotfiles"
-  stow vcs
+  stow git
+  stow mac
   stow nvim
   stow tmux
   stow zsh
-  stow jrnl
 fi
 
 # vim-plug
@@ -91,20 +95,10 @@ if [ ! -e ~/.config/nvim/autoload/plug.vim ]; then
 fi
 nvim +PlugInstall +PlugUpgrade +PlugUpdate +PlugClean! +UpdateRemotePlugins +qall
 
-if test ! "$(which n)"
-then
-  fancy_echo "Installing n - a node version manager"
-  npm install -g n
+if [ defaults read com.apple.finder CreateDesktop -gt 0 ]; then
+  fancy_echo "Disabling desktop icons"
+  defaults write com.apple.finder CreateDesktop -bool FALSE; killall Finder
 fi
-
-if test "$(which n)"
-then
-  fancy_echo "Installing latest LTS version of node"
-  N_PREFIX=~/bin n lts
-fi
-
-fancy_echo "Disabling desktop icons"
-defaults write com.apple.finder CreateDesktop -bool FALSE; killall Finder
 
 fancy_echo "Ending install script"
 
