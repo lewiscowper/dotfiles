@@ -1,13 +1,6 @@
 export ZSH_CONFIG_DIR=~/.config/zsh
 
-if [ -n "$(/bin/ls ${ZSH_CONFIG_DIR})" ]; then
-  for dotfile in ${ZSH_CONFIG_DIR}/*
-  do
-    if [ -r "${dotfile}" ]; then
-      source "${dotfile}"
-    fi
-  done
-fi
+for config (${ZSH_CONFIG_DIR}/*.zsh) source $config
 
 # external sourcing here
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
