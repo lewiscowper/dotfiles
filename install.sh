@@ -81,7 +81,6 @@ if test "$(which stow)"
 then
   fancy_echo "Symlinking dotfiles"
   stow git
-  stow mac
   stow nvim
   stow tmux
   stow zsh
