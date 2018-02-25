@@ -223,6 +223,8 @@ set statusline +=\ %{LinterStatus()}
 "    |__|:|        \  \:\       \__\/          \  \::/
 "     \__\|         \__\/                       \__\/
 
+" Automagically add rel="noopener" when using target="_blank"
+iabbrev target="_blank" target="_blank" rel="noopener"
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
