@@ -6,7 +6,7 @@ set -g prefix C-a
 bind C-a send-prefix
 
 # ctrl-a then r will reload this config
-bind r source-file ~/.tmux.conf\; display 'Reloaded'
+bind r source-file ~/.config/tmux/conf\; display 'Reloaded'
 
 # set large history limit
 set-option -g history-limit 10000
@@ -22,7 +22,7 @@ set -g base-index 1
 
 set -g status-left ''
 set -g status-left-length 17
-set -g status-right '#[fg=blue]#{prefix_highlight} #[fg=blue]⸤ %H#[fg=white]:#[fg=blue]%M ⸣ #[fg=blue]⸤ #(battery -tap) ⸣ #[fg=blue]⸤ #S ⸣ '
+set -g status-right '#[fg=blue]#{prefix_highlight} #[fg=blue]⸤ %H#[fg=white]:#[fg=blue]%M ⸣ #[fg=blue]⸤ #(battery -tap) #[fg=blue]⸣ #[fg=blue]⸤ #S ⸣ '
 set -g status-right-length 40
 
 # set the status bar to the top with no background colour
@@ -30,10 +30,10 @@ set -g status-position top
 set -g status-bg default
 
 # Non active windows are blue
-setw -g window-status-format '#[fg=blue] ⸤ #W ⸣'
+setw -g window-status-format '#[fg=blue] ⸤ #W - #(pwd="#{pane_current_path}"; echo ${pwd####*/}) ⸣'
 
 # Active windows are white, and bold
-setw -g window-status-current-format '#[fg=white,nobold] ⸤ #[fg=blue]#W #[fg=white]⸣'
+setw -g window-status-current-format '#[fg=white,nobold] ⸤ #[fg=blue]#W - #(pwd="#{pane_current_path}"; echo ${pwd####*/}) #[fg=white]⸣'
 
 # colorize messages in the command line
 set -g message-bg blue

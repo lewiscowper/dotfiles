@@ -25,6 +25,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'styled-components/vim-styled-components'
   " Golang plugin adding tons of fun options
   Plug 'fatih/vim-go'
+  " Dockerfile syntax
+  Plug 'docker/docker'
+  " Kubernetes syntax
+  Plug 'andrewstuart/vim-kubernetes'
   " Editorconfig
   Plug 'editorconfig/editorconfig-vim'
   " Asynchronous Lint Engine
@@ -41,6 +45,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " TernJS completion
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  " Go completion
+  Plug 'zchee/deoplete-go', { 'do': 'make'}
   " Colour scheme
   Plug 'arcticicestudio/nord-vim'
 call plug#end()
@@ -141,6 +147,14 @@ let g:vim_jsx_pretty_colorful_config=1
 
 let g:deoplete#enable_at_startup = 1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Deoplete-go
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
+
 "                    ___           ___           ___           ___
 "      ___          /  /\         /  /\         /  /\         /  /\
 "     /  /\        /  /:/        /  /::|       /  /::\       /  /::\
@@ -224,7 +238,7 @@ set statusline +=\ %{LinterStatus()}
 "     \__\|         \__\/                       \__\/
 
 " Automagically add rel="noopener" when using target="_blank"
-iabbrev target="_blank" target="_blank" rel="noopener"
+iab target="_blank" target="_blank" rel="noopener"
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %

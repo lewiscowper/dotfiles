@@ -42,3 +42,9 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+
+# Export directories for use elsewhere
+export MEDIA_DIR="$HOME/media"
+export AUDIO_DIR="${MEDIA_DIR}/audio"
+export IMG_DIR="${MEDIA_DIR}/images"
+export VIDEO_DIR="${MEDIA_DIR}/videos"

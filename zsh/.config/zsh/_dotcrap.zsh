@@ -55,3 +55,6 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 # Move spacemacs config files out of ~/.spacemacs or ~/.spacemacs.d/
 export SPACEMACSDIR="$XDG_CONFIG_HOME/spacemacs"
+
+# Move z.sh data out of ~/.z
+export _Z_DATA="$XDG_CACHE_HOME/z"

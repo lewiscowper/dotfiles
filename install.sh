@@ -61,21 +61,19 @@ esac
 
 fancy_echo "Creating directories in ~"
 
-if [ ! -d "$HOME/bin/" ]; then
-  mkdir "$HOME/bin"
-fi
+for dir in "bin" "dev" "media" "scratch"; do
+  if [ ! -d "$HOME/$dir/" ]; then
+    mkdir "$HOME/$dir"
+  fi
+done
 
-if [ ! -d "$HOME/dev/" ]; then
-  mkdir "$HOME/dev"
-fi
+fancy_echo "Creating directories in ~/media"
 
-if [ ! -d "$HOME/talks/" ]; then
-  mkdir "$HOME/talks"
-fi
-
-if [ ! -d "$HOME/videos/" ]; then
-  mkdir "$HOME/videos"
-fi
+for dirName in "audio" "images" "video"; do
+  if [ ! -d "$HOME/media/$dirName" ]; then
+    mkdir -p "$HOME/media/$(dirname)"
+  fi
+done
 
 if test "$(which stow)"
 then
@@ -93,11 +91,6 @@ if [ ! -e ~/.config/nvim/autoload/plug.vim ]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 nvim +PlugInstall +PlugUpgrade +PlugUpdate +PlugClean! +UpdateRemotePlugins +qall
-
-if [ defaults read com.apple.finder CreateDesktop -gt 0 ]; then
-  fancy_echo "Disabling desktop icons"
-  defaults write com.apple.finder CreateDesktop -bool FALSE; killall Finder
-fi
 
 fancy_echo "Ending install script"
 
