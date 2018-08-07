@@ -66,6 +66,10 @@
   remote = origin
   merge = refs/heads/master
 
+[url "git@finreach.github.com:FinReach"]
+insteadOf = git@github.com:FinReach
+insteadOf = https://github.com/FinReach
+
 
 [commit]
 [core]

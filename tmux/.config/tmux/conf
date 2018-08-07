@@ -22,8 +22,8 @@ set -g base-index 1
 
 set -g status-left ''
 set -g status-left-length 17
-set -g status-right '#[fg=blue]#{prefix_highlight} #[fg=blue]⸤ %H#[fg=white]:#[fg=blue]%M ⸣ #[fg=blue]⸤ #(battery -tap) #[fg=blue]⸣ #[fg=blue]⸤ #S ⸣ '
-set -g status-right-length 40
+set -g status-right '#[fg=blue]#{prefix_highlight} #[fg=blue]⸤ #(wifi-name) #[fg=blue]⸣ #[fg=blue]⸤ %H#[fg=white]:#[fg=blue]%M ⸣ #[fg=blue]⸤ #(battery -tap) #[fg=blue]⸣ #[fg=blue]⸤ #S ⸣ '
+set -g status-right-length 70
 
 # set the status bar to the top with no background colour
 set -g status-position top
