@@ -16,7 +16,7 @@ export PATH="$CARGO_HOME/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # Gopath variable because I want to put it inside dev
-export GOPATH="$HOME/dev/lewiscowper/go"
+export GOPATH="$DEV_DIR/go"
 export GOBIN="$GOPATH/bin"
 
 # Add that GOBIN directory to the path

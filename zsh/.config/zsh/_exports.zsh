@@ -43,8 +43,16 @@ export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
+# Set dev directories for use elsewhere
+export DEV_DIR="$HOME/dev/personal"
+export WORKDEV_DIR="$HOME/dev/personal"
+
 # Export directories for use elsewhere
 export MEDIA_DIR="$HOME/media"
 export AUDIO_DIR="${MEDIA_DIR}/audio"
 export IMG_DIR="${MEDIA_DIR}/images"
 export VIDEO_DIR="${MEDIA_DIR}/videos"
+
+# Some GPG stuff
+export SSH_AUTH_SOCK="${XDG_CONFIG_HOME}/gnupg/S.gpg-agent.ssh"
+export GPG_TTY=$(tty)

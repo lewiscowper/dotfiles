@@ -1,6 +1,7 @@
 [user]
 	email = lewis.cowper@googlemail.com
 	name = Lewis Cowper
+	signingkey = 203D84CDD64D6CB0
 
 [editor]
   editor = nvim
@@ -66,12 +67,8 @@
   remote = origin
   merge = refs/heads/master
 
-[url "git@finreach.github.com:FinReach"]
-insteadOf = git@github.com:FinReach
-insteadOf = https://github.com/FinReach
-
-
 [commit]
+	gpgsign = true
 [core]
 	excludesfile = /Users/lewis/.config/git/globalignore
 [difftool "sourcetree"]

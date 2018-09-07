@@ -58,3 +58,6 @@ export SPACEMACSDIR="$XDG_CONFIG_HOME/spacemacs"
 
 # Move z.sh data out of ~/.z
 export _Z_DATA="$XDG_CACHE_HOME/z"
+
+# Move wget stuff out of the home directory
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"

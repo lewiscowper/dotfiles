@@ -1,3 +1,7 @@
+if &compatible
+  set nocompatible
+endif
+
 "                    ___       ___           ___                        ___           ___
 "      ___          /  /\     /  /\         /  /\           ___        /  /\         /  /\
 "     /  /\        /  /:/    /  /:/        /  /::\         /__/\      /  /::|       /  /::\
@@ -15,6 +19,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tomtom/tcomment_vim'
   " FZF
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  " CtrlP
+  Plug 'ctrlpvim/ctrlp.vim'
+  " Light easymotion
+  Plug 'justinmk/vim-sneak'
   " JavaScript
   Plug 'pangloss/vim-javascript'
   " JSX
@@ -22,13 +30,15 @@ call plug#begin('~/.local/share/nvim/plugged')
   " JSON
   Plug 'leshill/vim-json'
   " Styled Components
-  Plug 'styled-components/vim-styled-components'
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
   " Golang plugin adding tons of fun options
   Plug 'fatih/vim-go'
   " Dockerfile syntax
   Plug 'docker/docker'
   " Kubernetes syntax
   Plug 'andrewstuart/vim-kubernetes'
+  " Vim CSS colours
+  Plug 'ap/vim-css-color'
   " Editorconfig
   Plug 'editorconfig/editorconfig-vim'
   " Asynchronous Lint Engine
@@ -42,7 +52,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Auto close parentheses etc
   Plug 'cohama/lexima.vim'
   " Completion framework
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
   " TernJS completion
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   " Go completion
@@ -92,7 +108,17 @@ colorscheme nord
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if has("gui_running")
-  let macvim_skip_colorscheme=1
+  let macvim_skip_colorscheme =1
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" MacVim remove scrollbars
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if has("gui_running")
+  set guioptions =
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,7 +128,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Fix files automatically on save
-let g:ale_fix_on_save=1
+let g:ale_fix_on_save =1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -113,9 +139,9 @@ let g:ale_fix_on_save=1
 
 " Always leave space for the git-gutter (aka sign column)
 if exists('&signcolumn')
-  set signcolumn=yes
+  set signcolumn =yes
 else
-  let g:gitgutter_sign_column_always = 1
+  let g:gitgutter_sign_column_always =1
 endif
 
 " Use · instead of +/-
@@ -233,7 +259,7 @@ set statusline +=%l/%L
 set statusline +=\ %{GitStatus()}
 
 " Add linter errors
-set statusline +=\ %{LinterStatus()}
+" set statusline +=\ %{LinterStatus()}
 
 "      ___           ___                         ___
 "     /  /\         /  /\          __           /  /\
@@ -284,8 +310,8 @@ noremap Y y$
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Double tap leader to toggle search highlights
-nnoremap <leader><leader> :set hlsearch!<CR>
+" leader + / to toggle search highlights
+nnoremap <leader>/ :set hlsearch!<CR>
 
 " Quick saving with leader + w
 nnoremap <leader>w :w!<CR>
