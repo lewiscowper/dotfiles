@@ -1,4 +1,5 @@
-alias ls='colorls -lA --sd'
+alias ls='colorls -l -A --sd'
+alias cat='bat'
 alias cp='cp -i'
 alias mv='mv -i'
 alias grep='grep --colour=auto'
@@ -18,3 +19,5 @@ alias clean-docker-containers='docker rm $(docker ps -aq)'
 alias clean-docker-images='docker rmi $(docker images -q)'
 alias clean-selenium="kill $(ps aux | grep 'selenium-standalon[e]' | awk '{print $2}')"
 alias did="vim +'normal Go' +'r!date' ~/did.txt"
+alias code='code --user-data-dir $XDG_CONFIG_HOME/vscode --extensions-dir $XDG_RUNTIME_DIR/vscode/extensions'
+alias kubectl='kubectl --cache-dir $XDG_CACHE_HOME/kube/http'

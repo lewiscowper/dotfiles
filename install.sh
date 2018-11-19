@@ -8,10 +8,16 @@ fancy_echo() {
   printf "\\n$fmt\\n" "$@"
 }
 
-fancy_echo "Beginning install script"
+fancy_echo "Starting install script"
+
+if test "$(uname)" = "Darwin"
+then
+  fancy_echo "Installing Homebrew for you."
+  sh mac/osx.sh
+fi
 
 # Check for Homebrew
-if test ! "$(which brew)"
+if test ! "$(command -v brew)"
 then
   fancy_echo "Installing Homebrew for you."
 
@@ -24,7 +30,7 @@ then
 fi
 
 # Check for Homebrew
-if test "$(which brew)"
+if test "$(command -v brew)"
 then
   fancy_echo "Updating Homebrew formulae"
   brew update --force # https://github.com/Homebrew/brew/issues/1151
@@ -38,7 +44,7 @@ fi
 
 update_shell() {
   local shell_path;
-  shell_path="$(which zsh)"
+  shell_path="$(command -v zsh)"
 
   fancy_echo "Changing your shell to zsh"
   if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
@@ -50,7 +56,7 @@ update_shell() {
 
 case "$SHELL" in
   */zsh)
-    if [ "$(which zsh)" != '/usr/local/bin/zsh' ] ; then
+    if [ "$(command -v zsh)" != '/usr/local/bin/zsh' ] ; then
       update_shell
     fi
     ;;
@@ -61,7 +67,7 @@ esac
 
 fancy_echo "Creating directories in ~"
 
-for dir in "bin" "dev" "media" "scratch"; do
+for dir in "dev" "media" "scratch"; do
   if [ ! -d "$HOME/$dir/" ]; then
     mkdir "$HOME/$dir"
   fi
@@ -75,9 +81,10 @@ for dirName in "audio" "images" "video"; do
   fi
 done
 
-if test "$(which stow)"
+if test "$(command -v stow)"
 then
   fancy_echo "Symlinking dotfiles"
+  stow bin
   stow git
   stow nvim
   stow tmux

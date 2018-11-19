@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+function git-stats () {
+    clear
+    git --no-pager diff --shortstat
+    git status --short
+}
+
+# Save terminal state; restore on exit
+tput smcup
+trap 'tput rmcup' INT TERM
+
+# Initially
+git-stats
+
+# And again whenever a file changes
+fswatch --recursive \
+    --format-time "%f %e" @./.git . \
+    | while read file; do git-stats; done

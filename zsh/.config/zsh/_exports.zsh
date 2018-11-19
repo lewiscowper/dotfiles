@@ -6,6 +6,9 @@ export SHELL=/bin/zsh
 # Set editor to vim
 export EDITOR=/usr/local/bin/nvim
 
+# Set vimrc's location and source it on startup
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim" | source $MYVIMRC'
+
 # Set locales and force UTF-8
 export LANG='en_GB.UTF-8';
 export LC_ALL='en_GB.UTF-8';
@@ -56,3 +59,6 @@ export VIDEO_DIR="${MEDIA_DIR}/videos"
 # Some GPG stuff
 export SSH_AUTH_SOCK="${XDG_CONFIG_HOME}/gnupg/S.gpg-agent.ssh"
 export GPG_TTY=$(tty)
+
+# hide cows in ansible scripts
+export ANSIBLE_NOCOWS=1

@@ -33,6 +33,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
   " Golang plugin adding tons of fun options
   Plug 'fatih/vim-go'
+  " Rust plugin
+  Plug 'rust-lang/rust.vim'
   " Dockerfile syntax
   Plug 'docker/docker'
   " Kubernetes syntax
@@ -507,9 +509,17 @@ else
   let &listchars ='tab:> ,extends:>,precedes:<,nbsp:.'
 endif
 
-" Set backup/swap directory to single location
-set backupdir=~/.config/nvim/tmp/
-set directory=~/.config/nvim/tmp/
+" Make vim respect the XDG base directory spec.
+set directory=$XDG_CACHE_HOME/nvim,~/,/tmp
+set backupdir=$XDG_CACHE_HOME/nvim,~/,/tmp
+set runtimepath=$XDG_CONFIG_HOME/nvim,$XDG_CONFIG_HOME/nvim/after,$VIM,$VIMRUNTIME
+let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
 
 " Turn off command logging to external file
 set viminfo=
+
+" Autocommands {{{1
+if has('autocmd')
+  " Re-source vimrc whenever changes are saved
+  autocmd BufWritePost vimrc source $MYVIMRC
+endif

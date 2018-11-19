@@ -1,0 +1,10 @@
+#!/bin/bash
+
+screenSaver="/Users/lewis/screensaver/ss.png"
+
+tempCapture="/tmp/wallpaper.png"
+
+/usr/sbin/screencapture -x ${tempCapture}
+
+/usr/local/bin/convert -scale 10% -scale 1000% -fill black -colorize 25% ${tempCapture} ${screenSaver}
+

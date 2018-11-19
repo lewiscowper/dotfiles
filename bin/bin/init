@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+init_repo () {
+  cd "$1" || exit
+  rm -rf .git
+  git init
+}
+
+if [ "$1" == '-h' ] || [ "$1" == "--help" ]; then
+  if [ "$2" == 'lang' ]; then
+    echo "lang can be one of: go, react, node"
+    exit 0
+  fi
+  echo "Usage: $(basename "$0") [lang] [projectName]"
+  echo "$(basename "$0") -h lang - See what languages this init script supports"
+  exit 0
+fi
+
+lang="$1"
+projectname="$2"
+
+if [ -z "$lang" ]
+  then
+    echo "What kind of project would you like to initialise?"
+    read -r lang
+fi
+
+echo Initialising "$lang" project...
+
+if [ -z "$projectname" ]
+then
+  echo "What should we call your project, or what directory should we put it in?"
+  read -r projectname
+fi
+
+if [ "$lang" = "go" ]
+then
+  git clone git@github.com:golang-standards/project-layout.git "$projectname"
+  init_repo "$projectname"
+elif [ "$lang" = "react" ]
+then
+  npm init react-app "$projectname"
+  init_repo "$projectname"
+elif [ "$lang" = "node" ]
+then
+  mkdir "$projectname"
+  init_repo "$projectname"
+  npm init --yes
+else
+  echo "Unknown project"
+  exit 1
+fi
+
+
