@@ -44,7 +44,7 @@ battery_charge() {
     case $(uname -s) in
         "Darwin")
             if ((pmset_on)) && command -v pmset &>/dev/null; then
-                if [ "$(pmset -g batt | grep -o 'AC Power')" ]; then
+                if pmset -g batt | grep -oq 'AC Power'; then
                     BATT_CONNECTED=1
                 else
                     BATT_CONNECTED=0
@@ -60,7 +60,7 @@ battery_charge() {
                             curcap=$value
                             ;;
                         "ExternalConnected")
-                            if [ $value == "No" ]; then
+                            if [ "$value" == "No" ]; then
                                 BATT_CONNECTED=0
                             else
                                 BATT_CONNECTED=1
@@ -127,18 +127,18 @@ print_status() {
         barlength=${#ascii_bar}
 
         # Battery percentage rounded to the lenght of ascii_bar
-        rounded_n=$(( $barlength * $BATT_PCT / 100 + 1))
+        rounded_n=( "$barlength" * "$BATT_PCT" / 100 + 1)
 
         # Creates the bar
         GRAPH=$(printf "[%-${barlength}s]" "${ascii_bar:0:rounded_n}")
     fi
 
     if ((output_tmux)); then
-        printf "%s%s%s%s" "$COLOR" "$BATT_PCT%"
+        printf "%s%s" "$COLOR" "$BATT_PCT%"
     elif ((output_zsh)); then
         printf "%%B%s%s %s" "$COLOR" "[$BATT_PCT%%]" "$GRAPH"
     else
-        printf "\e[0;%sm%s %s \e[m\n" "$COLOR" "[$BATT_PCT%]" "$GRAPH"
+        printf "\\e[0;%sm%s %s \\e[m\\n" "$COLOR" "[$BATT_PCT%]" "$GRAPH"
     fi
 }
 
@@ -176,11 +176,11 @@ while getopts ":g:m:w:tzeab:p" opt; do
             pmset_on=1
             ;;
         b)
-            if [ -d $OPTARG ]; then
+            if [ -d "$OPTARG" ]; then
                 battery_path=$OPTARG
             else
                 >&2 echo "Battery not found, trying to use default path..."
-                if [ ! -d $battery_path ]; then
+                if [ ! -d "$battery_path" ]; then
                     >&2 echo "Default battery path is also unreachable"
                     exit 1
                 fi
