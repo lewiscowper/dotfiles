@@ -1,0 +1,10 @@
+image: archlinux
+packages:
+  - make
+  - shellcheck
+sources:
+  - https://git.sr.ht/~lewiscowper/dotfiles
+tasks:
+  - test: |
+      cd dotfiles
+      make test
