@@ -21,3 +21,5 @@ alias clean-selenium="kill $(ps aux | grep 'selenium-standalon[e]' | awk '{print
 alias did="vim +'normal Go' +'r!date' ~/did.txt"
 alias code='code --user-data-dir $XDG_CONFIG_HOME/vscode --extensions-dir $XDG_RUNTIME_DIR/vscode/extensions'
 alias kubectl='kubectl --cache-dir $XDG_CACHE_HOME/kube/http'
+alias grep='rg --color always'
+alias procs='ps aux | grep -i'
