@@ -1,6 +1,9 @@
 .PHONY: test
 test: shellcheck ## Runs all the tests on the files in the repository.
 
+.PHONY: docker-test
+docker-test: docker-shellcheck ## Runs all the tests on the files in the repository.
+
 # if this session isn't interactive, then we don't want to allocate a
 # TTY, which would fail, but if it is interactive, we do want to attach
 # so that the user can send e.g. ^C through.
@@ -9,10 +12,14 @@ ifeq ($(INTERACTIVE), 1)
 	DOCKER_FLAGS += -t
 endif
 
-.PHONY: shellcheck
-shellcheck: ## Runs the shellcheck tests on the scripts.
+.PHONY: docker-shellcheck
+docker-shellcheck: ## Runs the shellcheck tests on the scripts.
 	docker run --rm -i $(DOCKER_FLAGS) \
 		--name df-shellcheck \
 		-v $(CURDIR):/usr/src:ro \
 		--workdir /usr/src \
 		r.j3ss.co/shellcheck ./test.sh
+
+.PHONY: shellcheck
+shellcheck: ## Runs the shellcheck tests on the scripts.
+	./test.sh
