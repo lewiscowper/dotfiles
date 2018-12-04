@@ -12,7 +12,7 @@ fancy_echo "Starting install script"
 
 if test "$(uname)" = "Darwin"
 then
-  fancy_echo "Installing Homebrew for you."
+  fancy_echo "Setting Macos defaults"
   sh mac/osx.sh
 fi
 
