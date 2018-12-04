@@ -89,6 +89,7 @@ then
   stow nvim
   stow tmux
   stow zsh
+  stow gnupg
 fi
 
 # create vim symlinks

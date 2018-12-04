@@ -5,6 +5,7 @@ export SHELL=/bin/zsh
 
 # Set editor to vim
 export EDITOR=/usr/local/bin/nvim
+export VISUAL="atom"
 
 # Set vimrc's location and source it on startup
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim" | source $MYVIMRC'
@@ -47,17 +48,17 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 # Set dev directories for use elsewhere
-export DEV_DIR="$HOME/dev/personal"
-export WORKDEV_DIR="$HOME/dev/personal"
+export DEV_DIR="$HOME"/dev/personal
+export WORKDEV_DIR="$HOME"/dev/personal
 
 # Export directories for use elsewhere
-export MEDIA_DIR="$HOME/media"
-export AUDIO_DIR="${MEDIA_DIR}/audio"
-export IMG_DIR="${MEDIA_DIR}/images"
-export VIDEO_DIR="${MEDIA_DIR}/videos"
+export MEDIA_DIR="$HOME"/media
+export AUDIO_DIR="${MEDIA_DIR}"/audio
+export IMG_DIR="${MEDIA_DIR}"/images
+export VIDEO_DIR="${MEDIA_DIR}"/videos
 
 # Some GPG stuff
-export SSH_AUTH_SOCK="${XDG_CONFIG_HOME}/gnupg/S.gpg-agent.ssh"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export GPG_TTY=$(tty)
 
 # hide cows in ansible scripts

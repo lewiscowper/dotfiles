@@ -1,5 +1,3 @@
-# System/shell related exports
-
 # Set up XDG_CONFIG user dirs in the most likely vain hope something looks for them
 export XDG_DOWNLOAD_DIR="$HOME"/tmp
 export XDG_CACHE_HOME="$HOME"/.local/cache

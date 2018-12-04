@@ -77,3 +77,6 @@ set -g display-panes-active-colour brightblack
 # Activity monitoring
 setw -g monitor-activity off
 set -g visual-activity off
+
+# Set SSH_AUTH_SOCK to our symlink, as set in ~/.ssh/rc
+set-environment -g 'SSH_AUTH_SOCK' ~/.ssh/ssh_auth_sock

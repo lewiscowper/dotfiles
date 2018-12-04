@@ -20,3 +20,5 @@ path() {
            sub(\"/Users/lewis\", \"$fg_no_bold[red]~$reset_color\"); \
            print }"
 }
+
+peek() { tmux split-window -p 33 $EDITOR $@ || exit; }

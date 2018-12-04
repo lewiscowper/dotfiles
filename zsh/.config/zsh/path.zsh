@@ -4,10 +4,7 @@
 export PATH="/usr/local/lib:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # Add npm bin directory to path
-export PATH="/Users/lewis/.local/share/npm/bin:$PATH"
-
-# Add global node install to path
-export PATH="$HOME/n/bin:$PATH"
+export PATH="$XDG_DATA_HOME/npm/bin:$PATH"
 
 # Add rust toolchain/cargo to path
 export PATH="$CARGO_HOME/bin:$PATH"
