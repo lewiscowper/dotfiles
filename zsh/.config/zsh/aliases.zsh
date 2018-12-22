@@ -1,7 +1,3 @@
-# cp and mv are now "interactive", aka will prompt before overwrite
-alias cp='cp -i'
-alias mv='mv -i'
-
 # little editor shorthands, e for edit directly in terminal, g for "graphically edit"
 alias e="$EDITOR"
 alias g="$VISUAL"
@@ -22,6 +18,10 @@ alias sz='source $XDG_CONFIG_HOME/zsh/.zshrc'
 _has() {
   command -v $1>/dev/null 2>&1
 }
+
+# cp and mv are now "interactive", aka will prompt before overwrite
+alias cp='cp -i'
+alias mv='mv -i'
 
 # Lovely ls replacement that adds colours and icons and so on
 # https://github.com/athityakumar/colorls
@@ -46,7 +46,7 @@ fi
 #
 # brew install neovim
 if _has nvim; then
-  alias vim='nvim'
+  alias vim='nvim -u $XDG_CONFIG_HOME/nvim/init.vim'
 fi
 
 # Tmux manages my workflow and sessions
@@ -58,11 +58,11 @@ if _has tmux; then
   #
   # -2 => force 256 colour mode
   # -f => sets a config file as I like to keep my home directory clean, and uses XDG directory spec
-  alias tmux='TERM=xterm-256color tmux -2 -f $XDG_CONFIG_HOME/tmux/conf'
+  alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/conf'
   # Shorthand to attach to a session by tag, e.g. ta <tag>
   alias ta="tmux attach -t"
-  # Shorthand to create a new session by tag, e.g. tn <tag>
-  alias tn="tmux new-session -t"
+  # Shorthand to create a new session by name, e.g. tn <name>
+  alias tn="tmux new-session -s"
   # Shorthand to list all sessions
   alias tls="tmux list-sessions"
 fi
@@ -130,4 +130,15 @@ fi
 if _has code; then
   # Launch code with XDG directories specified for data and extensions
   alias code='code --user-data-dir $XDG_CONFIG_HOME/vscode --extensions-dir $XDG_RUNTIME_DIR/vscode/extensions'
+fi
+
+# tldr is a neat help tool trying to simplify man pages with useful examples
+# https://tldr.sh
+#
+# brew install tldr
+if _has tldr; then
+  # Set up a help alias to see usage
+  alias help='tldr'
+else
+  alias help='man'
 fi

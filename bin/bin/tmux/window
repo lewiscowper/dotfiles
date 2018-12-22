@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo -e '#(window-name) - #(path-name)'
+exit 0

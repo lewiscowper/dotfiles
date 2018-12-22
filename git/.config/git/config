@@ -36,6 +36,14 @@
   # via https://medium.com/@payload.dd/thanks-for-the-git-st-i-will-use-this-4da5839a21a4
 
   stats = git-stats
+
+  # https://landongrindheim.com/2018/12/13/semantic-git-aliases.html
+  # Essentially make git a bit more semantic when you want to uncommit/unstage/check what you have
+  # staged
+  uncommit = reset --soft HEAD^
+  unstage = reset
+  staged = diff --cached
+  ctags = "!.git/hooks/ctags"
 [merge]
   conflictstyle = diff3
   # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
@@ -68,16 +76,14 @@
   remote = origin
   merge = refs/heads/master
 
+[pager]
+  diff = diff-so-fancy | less --tabs=1,5 -RFX
+  show = diff-so-fancy | less --tabs=1,5 -RFX
+
 [commit]
 	gpgsign = true
 [core]
 	excludesfile = /Users/lewis/.config/git/globalignore
-[difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path =
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
 [diff]
   compactionHeuristic = true
   algorithm = patience

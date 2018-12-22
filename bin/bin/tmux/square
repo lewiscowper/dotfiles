@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+START="⸤"
+END="⸣"
+
+# shellcheck disable=SC2048
+OUTPUT=$($*)
+
+echo "$START $OUTPUT $END"
+exit 0

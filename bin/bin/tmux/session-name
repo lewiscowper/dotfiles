@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo -e "#S"
+exit 0

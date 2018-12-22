@@ -20,30 +20,37 @@ set -g status-interval 5
 # set window numbering to 1 instead of 0 by default
 set -g base-index 1
 
-set -g status-left ''
-set -g status-left-length 17
-set -g status-right '#[fg=blue]#{prefix_highlight} #[fg=blue]⸤ #(wifi-name) #[fg=blue]⸣ #[fg=blue]⸤ %H#[fg=white]:#[fg=blue]%M ⸣ #[fg=blue]⸤ #(battery -tap) #[fg=blue]⸣ #[fg=blue]⸤ #S ⸣ '
-set -g status-right-length 70
+set -g status-left ' '
+set -g status-left-length 100
+set -g status-right '#(status-right)'
+set -g status-right-length 100
 
 # set the status bar to the top with no background colour
 set -g status-position top
 set -g status-bg default
 
 # Non active windows are blue
-setw -g window-status-format '#[fg=blue] ⸤ #W - #(pwd="#{pane_current_path}"; echo ${pwd####*/}) ⸣'
+setw -g window-status-format '#(inactive-window)'
 
 # Active windows are white, and bold
-setw -g window-status-current-format '#[fg=white,nobold] ⸤ #[fg=blue]#W - #(pwd="#{pane_current_path}"; echo ${pwd####*/}) #[fg=white]⸣'
+setw -g window-status-current-format '#(current-window)'
 
 # colorize messages in the command line
 set -g message-bg blue
 set -g message-fg white
 
 # Set term correctly
-set -g default-terminal "screen-256color"
+set -g default-terminal 'tmux-256color'
+set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+
+# Set command correctly for sudo + touchID/pasteboard issues
+set-option -g default-command 'reattach-to-user-namespace -l $SHELL'
 
 # Set status bar
 set -g status-justify 'left'
+
+# Add magic focus events
+set -g focus-events on
 
 # show/hide status bar with shift+up/shift+down
 bind-key -n S-Down set -g status

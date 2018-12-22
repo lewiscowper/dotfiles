@@ -89,6 +89,11 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
+# Set default download folder to $XDG_DOWNLOAD_DIR
+if [[ -n "${XDG_DOWNLOAD_DIR}" ]]; then
+  defaults write com.apple.Safari DownloadsPath "$XDG_DOWNLOAD_DIR"
+fi
+
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true

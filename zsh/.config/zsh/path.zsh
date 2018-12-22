@@ -9,8 +9,14 @@ export PATH="$XDG_DATA_HOME/npm/bin:$PATH"
 # Add rust toolchain/cargo to path
 export PATH="$CARGO_HOME/bin:$PATH"
 
+# Add ruby toolchain to path
+export PATH="$GEM_HOME/bin:$PATH"
+
 # Add custom bin directories to path
 export PATH="$HOME/bin:$PATH"
+
+# Add custom tmux scripts to path
+export PATH="$HOME/bin/tmux:$PATH"
 
 # Gopath variable because I want to put it inside dev
 export GOPATH="$DEV_DIR/go"

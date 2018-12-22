@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+OUTPUT=$(square "$*")
+COLOR=$(main-color)
+
+echo "$COLOR$OUTPUT"
+exit 0

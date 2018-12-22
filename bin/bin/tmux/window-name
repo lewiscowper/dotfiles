@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo -e "#W"
+exit 0

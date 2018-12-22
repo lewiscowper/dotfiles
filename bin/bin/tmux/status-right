@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "#(color-square cpu) #(color-square wifi-name) #(color-square time) #(color-square battery -tp) #(mode-colors) #(color-square session-name) "
+exit 0

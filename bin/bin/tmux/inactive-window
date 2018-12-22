@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "#(color-square window)"
+exit 0

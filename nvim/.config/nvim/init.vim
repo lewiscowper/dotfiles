@@ -15,58 +15,62 @@ endif
 "                   \__\/     \__\/         \__\/                      \__\/         \__\/
 
 call plug#begin('~/.local/share/nvim/plugged')
-  " TComment
-  Plug 'tomtom/tcomment_vim'
-  " FZF
-  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-  " CtrlP
-  Plug 'ctrlpvim/ctrlp.vim'
-  " Light easymotion
-  Plug 'justinmk/vim-sneak'
-  " JavaScript
-  Plug 'pangloss/vim-javascript'
-  " JSX
-  Plug 'mxw/vim-jsx'
-  " JSON
-  Plug 'leshill/vim-json'
-  " Styled Components
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-  " Golang plugin adding tons of fun options
-  Plug 'fatih/vim-go'
-  " Rust plugin
-  Plug 'rust-lang/rust.vim'
-  " Dockerfile syntax
-  Plug 'docker/docker'
-  " Kubernetes syntax
-  Plug 'andrewstuart/vim-kubernetes'
-  " Vim CSS colours
-  Plug 'ap/vim-css-color'
-  " Editorconfig
-  Plug 'editorconfig/editorconfig-vim'
-  " Asynchronous Lint Engine
-  Plug 'w0rp/ale'
-  " Highlight whitespace (and enable trimming it)
-  Plug 'ntpeters/vim-better-whitespace'
-  " vim surround
-  Plug 'tpope/vim-surround'
-  " gitgutter
-  Plug 'airblade/vim-gitgutter'
-  " Auto close parentheses etc
-  Plug 'cohama/lexima.vim'
-  " Completion framework
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
-  " TernJS completion
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  " Go completion
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
-  " Colour scheme
-  Plug 'arcticicestudio/nord-vim'
+" Tagbar
+Plug 'majutsushi/tagbar'
+" TComment
+Plug 'tomtom/tcomment_vim'
+" FZF
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+" CtrlP
+Plug 'ctrlpvim/ctrlp.vim'
+" Light easymotion
+Plug 'justinmk/vim-sneak'
+" JavaScript
+Plug 'pangloss/vim-javascript'
+" JSX
+Plug 'mxw/vim-jsx'
+" JSON
+Plug 'leshill/vim-json'
+" Styled Components
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" Golang plugin adding tons of fun options
+Plug 'fatih/vim-go'
+" Rust plugin
+Plug 'rust-lang/rust.vim'
+" Dockerfile syntax
+Plug 'docker/docker'
+" Kubernetes syntax
+Plug 'andrewstuart/vim-kubernetes'
+" Vim CSS colours
+Plug 'ap/vim-css-color'
+" Editorconfig
+Plug 'editorconfig/editorconfig-vim'
+" Asynchronous Lint Engine
+Plug 'w0rp/ale'
+" Highlight whitespace (and enable trimming it)
+Plug 'ntpeters/vim-better-whitespace'
+" vim surround
+Plug 'tpope/vim-surround'
+" gitgutter
+Plug 'airblade/vim-gitgutter'
+" Auto close parentheses etc
+Plug 'cohama/lexima.vim'
+" Some kind of tmuc fix for focus events
+Plug 'tmux-plugins/vim-tmux-focus-events'
+" Completion framework
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+" TernJS completion
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Go completion
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+" Colour scheme
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 "                    ___       ___           ___                        ___
@@ -102,6 +106,12 @@ call plug#end()
 set background =dark
 
 colorscheme nord
+
+let g:nord_italic = 1
+let g:nord_underline = 1
+
+let g:nord_italic_comments = 1
+let g:nord_comment_brightness = 12
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -165,6 +175,9 @@ let g:ctrlp_cmd='CtrlP'
 " Show hidden files in Ctrl+P
 let g:ctrlp_show_hidden=1
 
+" Skip files inside .gitignore
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " vim-jsx
@@ -206,12 +219,12 @@ let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
 "                   \__\/         \__\/         \__\/         \__\/
 
 function! GitBranch() abort
-  return system("git rev-parse --abrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
-function! GitStatus() abort
+function! StatuslineGit()
   let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+  return strlen(l:branchname) > 0 ? ''.l:branchname.'':''
 endfunction
 
 function! LinterStatus() abort
@@ -221,11 +234,26 @@ function! LinterStatus() abort
   let l:all_non_errors = l:counts.total - l:all_errors
 
   return l:counts.total == 0 ? 'OK' : printf(
-  \ '%dW %dE',
-  \ l:all_non_errors,
-  \ l:all_errors
-  \)
+        \ '%dW %dE',
+        \ l:all_non_errors,
+        \ l:all_errors
+        \)
 endfunction
+
+"       ___           ___           ___       ___           ___           ___           ___
+"      /  /\         /  /\         /  /\     /  /\         /  /\         /  /\         /  /\
+"     /  /::\       /  /::\       /  /:/    /  /::\       /  /:/        /  /::\       /  /::\
+"    /  /:/\:\     /  /:/\:\     /  /:/    /  /:/\:\     /  /:/        /  /:/\:\     /__/:/\:\
+"   /  /:/  \:\   /  /:/  \:\   /  /:/    /  /:/  \:\   /  /:/        /  /::\ \:\   _\_ \:\ \:\
+"  /__/:/ \  \:\ /__/:/ \__\:\ /__/:/    /__/:/ \__\:\ /__/:/     /\ /__/:/\:\_\:\ /__/\ \:\ \:\
+"  \  \:\  \__\/ \  \:\ /  /:/ \  \:\    \  \:\ /  /:/ \  \:\    /:/ \__\/~|::\/:/ \  \:\ \:\_\/
+"   \  \:\        \  \:\  /:/   \  \:\    \  \:\  /:/   \  \:\  /:/     |  |:|::/   \  \:\_\:\
+"    \  \:\        \  \:\/:/     \  \:\    \  \:\/:/     \  \:\/:/      |  |:|\/     \  \:\/:/
+"     \  \:\        \  \::/       \  \:\    \  \::/       \  \::/       |__|:|~       \  \::/
+"      \__\/         \__\/         \__\/     \__\/         \__\/         \__\|         \__\/
+
+hi User1 ctermbg=none  ctermfg=cyan  guibg=none    guifg=#6581A8
+hi User2 ctermbg=blue  ctermfg=none  guibg=#6581A8 guifg=none
 
 "      ___                       ___                         ___           ___
 "     /  /\        ___          /  /\          ___          /  /\         /  /\
@@ -245,23 +273,35 @@ set laststatus =2
 " Clear anything existing from the statusline to begin with
 set statusline =
 
-" Add full path (truncated to last 40 characters)
-set statusline +=%.40F
+" Add file path based on current directory
+set statusline +=%2*\ %f
 
-" Add modified flag
-set statusline +=%m
-
-" Left/Right separator
-set statusline +=%=
-
-" {currentLine}/{TotalLines}
-set statusline +=%l/%L
+" Spacing
+set statusline +=%2*\ 
 
 " Add git branch
-set statusline +=\ %{GitStatus()}
+set statusline +=%1*\ %{StatuslineGit()}
+
+" Add modified flag
+set statusline +=%1*\ %m
+
+" Left/Right separator
+set statusline +=\ %=
+
+" {currentLine}/{TotalLines}
+set statusline +=%1*\ %l/%L
+
+" Spacing
+set statusline +=%1*\ 
 
 " Add linter errors
-" set statusline +=\ %{LinterStatus()}
+set statusline +=%2*\ %{LinterStatus()}
+
+" current time, when buffer saved
+set statusline+=%2*\ %{strftime('%R',getftime(expand('%')))}
+
+" Spacing
+set statusline +=%2*\ 
 
 "      ___           ___                         ___
 "     /  /\         /  /\          __           /  /\
@@ -335,8 +375,15 @@ inoremap <leader><C-m> <C-n>
 
 " Comment line
 noremap <silent> <leader>cc :TComment<CR>
+
+" Strip whitespace
 noremap <silent> <leader>cs :StripWhitespace<CR>
+
+" Fold/unfold
 nnoremap <silent> <leader>c<Space> za
+
+" Auto indent whole file, returning cursor to previous line and centered in view
+noremap <silent> <Leader><Tab> <esc>gg=G<C-o><C-o>zz
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -502,6 +549,12 @@ set list
 " Allow recursive search
 set path +=**
 
+" Force true colour on
+" https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
 " Set up whitespace characters for utf-8 vs no utf-8
 if has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars ='tab:▸ ,extends:❯,precedes:❮,nbsp:±'
@@ -512,14 +565,16 @@ endif
 " Make vim respect the XDG base directory spec.
 set directory=$XDG_CACHE_HOME/nvim,~/,/tmp
 set backupdir=$XDG_CACHE_HOME/nvim,~/,/tmp
-set runtimepath=$XDG_CONFIG_HOME/nvim,$XDG_CONFIG_HOME/nvim/after,$VIM,$VIMRUNTIME
-let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+set runtimepath+=$XDG_CONFIG_HOME/nvim,$XDG_CONFIG_HOME/nvim/after
+let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim"
 
 " Turn off command logging to external file
 set viminfo=
 
-" Autocommands {{{1
+
+
+" Autocommands
 if has('autocmd')
   " Re-source vimrc whenever changes are saved
-  autocmd BufWritePost vimrc source $MYVIMRC
+  autocmd BufWritePost vim source $MYVIMRC
 endif

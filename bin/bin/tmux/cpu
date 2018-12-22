@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+OUTPUT=$(top -l 1 | awk 'FNR==4 {print $3}' OFS="\\t")
+
+echo -e "$OUTPUT"
+exit 0

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "#{b:pane_current_path}"
+exit 0

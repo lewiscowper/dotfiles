@@ -80,3 +80,13 @@ export ANSIBLE_CONFIG="$XDG_CONFIG_HOME"/ansible
 
 # Move android config out of ~/.android
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
+
+# Move travis config out of ~/.travis
+export TRAVIS_CONFIG_PATH="$XDG_CONFIG_HOME"/travis
+
+# Set git template directory
+export GIT_TEMPLATE_DIR="$XDG_CONFIG_HOME"/git/template
+
+# Set terminfo location + directories
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo

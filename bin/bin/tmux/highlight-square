@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+OUTPUT=$("$*")
+
+echo -e "#(highlight-color)⸤ #(main-color)$OUTPUT #(highlight-color)⸣"
+exit 0

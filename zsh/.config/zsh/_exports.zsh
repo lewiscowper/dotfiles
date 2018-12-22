@@ -7,9 +7,6 @@ export SHELL=/bin/zsh
 export EDITOR=/usr/local/bin/nvim
 export VISUAL="atom"
 
-# Set vimrc's location and source it on startup
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim" | source $MYVIMRC'
-
 # Set locales and force UTF-8
 export LANG='en_GB.UTF-8';
 export LC_ALL='en_GB.UTF-8';
@@ -49,7 +46,7 @@ export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 # Set dev directories for use elsewhere
 export DEV_DIR="$HOME"/dev/personal
-export WORKDEV_DIR="$HOME"/dev/personal
+export WORKDEV_DIR="$HOME"/dev/work
 
 # Export directories for use elsewhere
 export MEDIA_DIR="$HOME"/media

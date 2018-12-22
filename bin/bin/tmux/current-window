@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "#(highlight-square window)"
+exit 0

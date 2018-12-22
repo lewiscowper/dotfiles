@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+HOUR="$(date +%H)"
+MINUTE="$(date +%M)"
+
+echo -e "${HOUR}#(highlight-color):#(main-color)${MINUTE}"
+exit 0
