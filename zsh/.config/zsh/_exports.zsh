@@ -60,3 +60,6 @@ export GPG_TTY=$(tty)
 
 # hide cows in ansible scripts
 export ANSIBLE_NOCOWS=1
+
+# Allow homebrew to cleanup unneeded files periodically
+export HOMEBREW_INSTALL_CLEANUP=1
