@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [[ $(pmset -g ps | head -1) =~ "AC Power" ]]; then
+  echo 1
+else
+  echo 0
+fi
+
+exit 0

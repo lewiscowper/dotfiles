@@ -12,7 +12,7 @@ bind r source-file ~/.config/tmux/conf\; display 'Reloaded'
 set-option -g history-limit 10000
 
 # set faster escape sequences so tmux is more responsive
-set -s escape-time 0
+set -sg escape-time 10
 
 # update status bar every 5 seconds
 set -g status-interval 5
@@ -20,10 +20,11 @@ set -g status-interval 5
 # set window numbering to 1 instead of 0 by default
 set -g base-index 1
 
-set -g status-left ' '
-set -g status-left-length 100
+set -g status-left '#(echo -e " ")'
+set -g status-left-length 1
 set -g status-right '#(status-right)'
-set -g status-right-length 100
+set -g status-right-length 1000
+
 
 # set the status bar to the top with no background colour
 set -g status-position top

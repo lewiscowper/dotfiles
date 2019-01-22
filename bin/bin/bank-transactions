@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+today="$(date +%Y-%m-%d)"
+one_month_ago="$(date -j -v-1m +%Y-%m-%d)"
+
+balance="$(n26 balance json | jq .usableBalance)"
+
+echo -e "$(n26 transactions from=\""$one_month_ago"\" to=\""$today"\" smartcsv)" > "$today-n26-$balance"

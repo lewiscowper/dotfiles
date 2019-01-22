@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+system_profiler SPBluetoothDataType | awk "/Lewis/{p=0} /Lewis\\' Headphones/{p=1} p" | \grep -q "Connected: Yes"

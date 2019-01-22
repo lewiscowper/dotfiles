@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+COLOR="#(main-color)"
+CHARGE_LEVEL="$(battery-charge | sed -e 's/%//')"
+IS_CHARGING="$(charging)"
+
+if [[ CHARGE_LEVEL -lt 25 && $IS_CHARGING -eq 0 ]]; then
+  COLOR="#(tertiary-color)"
+fi
+
+if [[ $IS_CHARGING -eq 1 ]]; then
+  COLOR="#(highlight-color)"
+fi
+
+echo -e "$COLOR$CHARGE_LEVEL%"
+exit 0

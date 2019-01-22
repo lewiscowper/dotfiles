@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 fancy_echo() {
@@ -10,10 +10,21 @@ fancy_echo() {
 
 fancy_echo "Starting install script"
 
+if test "$(command -v curl)"
+then
+  fancy_echo "Grabbing dotcrap file"
+  pushd "$HOME"/dotfiles
+  curl -O https://raw.githubusercontent.com/lewiscowper/dotcrap/master/dotcrap
+  # shellcheck disable=SC1091,1090
+  source "$HOME"/dotfiles/dotcrap
+  popd
+fi
+
+
 if test "$(uname)" = "Darwin"
 then
   fancy_echo "Setting Macos defaults"
-  sh mac/osx.sh
+  sh mac/mac.sh
 fi
 
 # Check for Homebrew
@@ -39,14 +50,13 @@ fi
 if test "$(brew bundle check >/dev/null 2>&1)"
 then
   fancy_echo "Installing specified formulae"
-  brew bundle --file=~/dotfiles/Brewfile
+  brew bundle --file="$HOME"/dotfiles/Brewfile
 fi
 
 update_shell() {
   local shell_path;
   shell_path="$(command -v zsh)"
 
-  fancy_echo "Changing your shell to zsh"
   if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
     fancy_echo "Adding '$shell_path' to /etc/shells"
     sudo sh -c "echo $shell_path >> /etc/shells"
@@ -54,32 +64,33 @@ update_shell() {
   sudo chsh -s "$shell_path" "$USER"
 }
 
-case "$SHELL" in
-  */zsh)
-    if [ "$(command -v zsh)" != '/usr/local/bin/zsh' ] ; then
-      update_shell
-    fi
-    ;;
-  *)
-    update_shell
-    ;;
-esac
+if [ "$SHELL" != "/bin/zsh" ]; then
+  fancy_echo "Changing your shell to zsh"
+  update_shell
+fi
 
-fancy_echo "Creating directories in ~"
-
-for dir in "dev" "media" "scratch"; do
+for dir in ".config", ".local", ".ssh", "dev" "media", "tmp", "docs", "bak", "sync"; do
   if [ ! -d "$HOME/$dir/" ]; then
-    mkdir "$HOME/$dir"
+    mkdir -p "$HOME/$(dir)" && fancy_echo "Created $HOME/$dir"
   fi
 done
 
-fancy_echo "Creating directories in ~/media"
+for dirName in "work" "personal"; do
+  if [ ! -d "$HOME/dev/$dirName" ]; then
+    mkdir -p "$HOME/dev/$(dirname)" && fancy_echo "Created $HOME/dev/$(dirname)"
+  fi
+done
 
 for dirName in "audio" "images" "video"; do
   if [ ! -d "$HOME/media/$dirName" ]; then
-    mkdir -p "$HOME/media/$(dirname)"
+    mkdir -p "$HOME/media/$(dirname)" && fancy_echo "Created $HOME/media/$(dirname)"
   fi
 done
+
+if [ -f "$HOME"/dotfiles/dotcrap ]; then
+  fancy_echo "Moving dotcrap into zsh config directory"
+  mv "$HOME"/dotfiles/dotcrap "$HOME"/dotfiles/zsh/.config/zsh/_dotcrap
+fi
 
 if test "$(command -v stow)"
 then
@@ -92,33 +103,10 @@ then
   stow gnupg
 fi
 
-# create vim symlinks
-# As I have moved off of vim as my full time editor in favor of neovim,
-# I feel it doesn't make sense to leave my vimrc intact in the dotfiles repo
-# as it is not really being actively maintained. However, I would still
-# like to configure vim, so lets symlink ~/.vimrc and ~/.vim over to their
-# neovim equivalent.
-
-fancy_echo "Creating vim symlinks"
-fancy_echo "=============================="
-VIMFILES=( "$HOME/.vim:$HOME/.config/nvim"
-        "$HOME/.vimrc:$HOME/.config/nvim/init.vim" )
-
-for file in "${VIMFILES[@]}"; do
-    KEY=${file%%:*}
-    VALUE=${file#*:}
-    if [ -e "${KEY}" ]; then
-        fancy_echo "${KEY} already exists... skipping."
-    else
-        fancy_echo "Creating symlink for $KEY"
-        ln -s "${VALUE}" "${KEY}"
-    fi
-done
-
 # vim-plug
-if [ ! -e ~/.config/nvim/autoload/plug.vim ]; then
+if [ ! -e "$HOME"/.config/nvim/autoload/plug.vim ]; then
   fancy_echo "Installing vim-plug"
-  curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+  curl -fLo "$HOME"/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 nvim +PlugInstall +PlugUpgrade +PlugUpdate +PlugClean! +UpdateRemotePlugins +qall

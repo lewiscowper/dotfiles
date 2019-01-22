@@ -1,6 +1,6 @@
 # little editor shorthands, e for edit directly in terminal, g for "graphically edit"
 alias e="$EDITOR"
-alias g="$VISUAL"
+alias vim="nvim"
 
 # While I remember this from 'eXtract Ze Files', this can be handy
 alias untar='tar xvf'
@@ -29,7 +29,7 @@ alias mv='mv -i'
 #
 # gem install colorls
 if _has colorls; then
-  alias ls='colorls -l -A --sd'
+  alias ls='colorls -A --sd'
 fi
 
 # A lovely cat replacement written in Rust
@@ -41,41 +41,17 @@ if _has bat; then
   alias cat='bat'
 fi
 
-# Neovim is an interesting vim fork focussed on usability and extensibility
-# https://github.com/neovim/neovim
-#
-# brew install neovim
-if _has nvim; then
-  alias vim='nvim -u $XDG_CONFIG_HOME/nvim/init.vim'
-fi
-
 # Tmux manages my workflow and sessions
 # https://github.com/tmux/tmux
 #
 # brew install tmux
 if _has tmux; then
-  # This sets a tmux compatible term variable, then launches tmux with the following options:
-  #
-  # -2 => force 256 colour mode
-  # -f => sets a config file as I like to keep my home directory clean, and uses XDG directory spec
-  alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/conf'
   # Shorthand to attach to a session by tag, e.g. ta <tag>
   alias ta="tmux attach -t"
   # Shorthand to create a new session by name, e.g. tn <name>
   alias tn="tmux new-session -s"
   # Shorthand to list all sessions
   alias tls="tmux list-sessions"
-fi
-
-# Weechat is my irc client of choice
-# https://github.com/weechat/weechat
-#
-# brew install weechat
-if _has weechat; then
-  # Launches weechat with the following options:
-  #
-  # => -d sets a config file directory using the XDG directory spec to keep ~ clean
-  alias weechat='weechat -d $XDG_CONFIG_HOME/weechat'
 fi
 
 # Docker runs docker containers, remarkable that
@@ -87,24 +63,6 @@ if _has docker; then
   alias dockerrm='docker rm $(docker ps -aq)'
   # Removes images that are not associated with running containers
   alias dockerrmi='docker rmi $(docker images -q)'
-fi
-
-# kubectl controls kubernetes cluster (running via docker for mac)
-# See docker for install link
-if _has kubectl; then
-  # Launch kubectl with the cache directory set to a proper cache dir
-  alias kubectl='kubectl --cache-dir $XDG_CACHE_HOME/kube/http --kubeconfig $XDG_CONFIG_HOME/kube/config'
-fi
-
-# gpg manages my ssh sessions and secret keys
-# https://github.com/gpg/gnupg
-#
-# brew install gpg
-if _has gpg; then
-  # Launches gpg with config
-  #
-  # => --homedir sets a config file directory using the XDG directory spec to keep ~ clean
-  alias gpg='gpg --homedir $XDG_CONFIG_HOME/gnupg'
 fi
 
 # rg or ripgrep is a grep that searches recursively and respects my .gitignore files
@@ -123,15 +81,6 @@ else
   alias grep='grep --color=auto'
 fi
 
-# VSCode is an editor I rarely use, but the remote pair programming tool is great for interviews
-# https://code.visualstudio.com/docs/?dv=osx
-#
-# See above for install link
-if _has code; then
-  # Launch code with XDG directories specified for data and extensions
-  alias code='code --user-data-dir $XDG_CONFIG_HOME/vscode --extensions-dir $XDG_RUNTIME_DIR/vscode/extensions'
-fi
-
 # tldr is a neat help tool trying to simplify man pages with useful examples
 # https://tldr.sh
 #
@@ -141,4 +90,13 @@ if _has tldr; then
   alias help='tldr'
 else
   alias help='man'
+fi
+
+# Neomutt is a console mail client
+# https://neomutt.org
+#
+# brew install neomutt/neomutt/neomutt --with-gpgme --with-libidn --with-notmuch-patch --with-s-lang
+if _has neomutt; then
+  # Sets an alias that moves the config directory out of ~/.subversion
+  alias mutt='neomutt'
 fi

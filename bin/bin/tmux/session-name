@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo -e "#S"
+echo -e "#{?pane_in_mode,#(tertiary-color),#{?client_prefix,#(highlight-color),#(main-color)}}#S"
 exit 0

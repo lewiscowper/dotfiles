@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "#(color-square window)"
+echo "#(main-color)#(color-square window)"
 exit 0

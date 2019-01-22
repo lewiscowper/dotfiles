@@ -10,6 +10,7 @@ export PATH="$XDG_DATA_HOME/npm/bin:$PATH"
 export PATH="$CARGO_HOME/bin:$PATH"
 
 # Add ruby toolchain to path
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$GEM_HOME/bin:$PATH"
 
 # Add custom bin directories to path

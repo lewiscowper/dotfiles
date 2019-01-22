@@ -4,8 +4,7 @@
 export SHELL=/bin/zsh
 
 # Set editor to vim
-export EDITOR=/usr/local/bin/nvim
-export VISUAL="atom"
+export EDITOR=nvim
 
 # Set locales and force UTF-8
 export LANG='en_GB.UTF-8';
@@ -22,6 +21,12 @@ ZLE_RPROMPT_INDENT=0
 
 # Change colour of the zsh autosuggest
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=4'
+
+# Add a HISTORY_IGNORE variable to ignore certain commands from being stored in history
+export HISTORY_IGNORE="(ls|cd|cd -|pwd|exit|date|* --help)"
+
+# Add a HIST_IGNORE just in case I get to the point that I stop using zsh
+export HIST_IGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 
 # Custom userland exports
 
@@ -49,6 +54,7 @@ export DEV_DIR="$HOME"/dev/personal
 export WORKDEV_DIR="$HOME"/dev/work
 
 # Export directories for use elsewhere
+export XDG_DOWNLOAD_DIR="$HOME"/tmp
 export MEDIA_DIR="$HOME"/media
 export AUDIO_DIR="${MEDIA_DIR}"/audio
 export IMG_DIR="${MEDIA_DIR}"/images

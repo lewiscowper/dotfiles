@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if bluetooth-headphones-connected; then
+  echo -e ""
+else
+  echo -e ""
+fi

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-START="⸤"
-END="⸣"
+START="#(main-color)⸤"
+END="#(main-color)⸣"
 
 # shellcheck disable=SC2048
 OUTPUT=$($*)
