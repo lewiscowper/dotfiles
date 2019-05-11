@@ -81,7 +81,7 @@
   show = diff-so-fancy | less --tabs=1,5 -RFX
 
 [commit]
-	gpgsign = true
+	gpgsign = false
 [core]
 	excludesfile = /Users/lewis/.config/git/globalignore
 [diff]

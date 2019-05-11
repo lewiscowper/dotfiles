@@ -39,6 +39,9 @@ set viminfo=""
 set undodir="$XDG_CACHE_HOME/nvim/undo"
 set undofile
 
+" Move netrwhist to XDG_CACHE_HOME
+let g:netrw_home="$XDG_CACHE_HOME/nvim"
+
 " We'll show the mode in the status bar, no need now
 set noshowmode
 

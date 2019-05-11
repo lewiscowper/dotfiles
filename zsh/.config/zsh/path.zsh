@@ -25,3 +25,6 @@ export GOBIN="$GOPATH/bin"
 
 # Add that GOBIN directory to the path
 export PATH="$GOBIN:$PATH"
+
+# Add ncurses from brew to the path
+export PATH="/usr/local/opt/ncurses/bin:$PATH"

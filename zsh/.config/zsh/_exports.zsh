@@ -61,8 +61,8 @@ export IMG_DIR="${MEDIA_DIR}"/images
 export VIDEO_DIR="${MEDIA_DIR}"/videos
 
 # Some GPG stuff
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-export GPG_TTY=$(tty)
+# export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+# export GPG_TTY=$(tty)
 
 # hide cows in ansible scripts
 export ANSIBLE_NOCOWS=1

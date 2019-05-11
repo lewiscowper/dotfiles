@@ -25,6 +25,13 @@ if test "$(uname)" = "Darwin"
 then
   fancy_echo "Setting Macos defaults"
   sh mac/mac.sh
+
+  fancy_echo "Downloading mac specific files"
+  sh mac/downloads.sh
+
+  fancy_echo "Installing terminfo for italics support"
+  tic -x mac/tmux-256color.terminfo
+  tic -x mac/xterm-256color-italic.terminfo
 fi
 
 # Check for Homebrew
@@ -47,7 +54,7 @@ then
   brew update --force # https://github.com/Homebrew/brew/issues/1151
 fi
 
-if test "$(brew bundle check >/dev/null 2>&1)"
+if test "$(command -v brew)"
 then
   fancy_echo "Installing specified formulae"
   brew bundle --file="$HOME"/dotfiles/Brewfile
@@ -69,21 +76,26 @@ if [ "$SHELL" != "/bin/zsh" ]; then
   update_shell
 fi
 
-for dir in ".config", ".local", ".ssh", "dev" "media", "tmp", "docs", "bak", "sync"; do
-  if [ ! -d "$HOME/$dir/" ]; then
-    mkdir -p "$HOME/$(dir)" && fancy_echo "Created $HOME/$dir"
+for dir in ".config" ".local" ".ssh" "dev" "media" "tmp" "docs" "bak" "sync"; do
+  if [ ! -d "$HOME/$dir" ]; then
+    mkdir "$HOME/$dir" && fancy_echo "Created $HOME/$dir"
   fi
 done
 
+if [ -d "$HOME/sync" ]; then
+  fancy_echo "Creating iCloud link in sync directory"
+  ln -s "$HOME"/Library/Mobile\ Documents/com~apple~CloudDocs/ "$HOME"/"$dir"/iCloud
+fi
+
 for dirName in "work" "personal"; do
   if [ ! -d "$HOME/dev/$dirName" ]; then
-    mkdir -p "$HOME/dev/$(dirname)" && fancy_echo "Created $HOME/dev/$(dirname)"
+    mkdir "$HOME/dev/$dirName" && fancy_echo "Created $HOME/dev/$dirName"
   fi
 done
 
 for dirName in "audio" "images" "video"; do
   if [ ! -d "$HOME/media/$dirName" ]; then
-    mkdir -p "$HOME/media/$(dirname)" && fancy_echo "Created $HOME/media/$(dirname)"
+    mkdir "$HOME/media/$dirName" && fancy_echo "Created $HOME/media/$dirName"
   fi
 done
 
@@ -92,15 +104,28 @@ if [ -f "$HOME"/dotfiles/dotcrap ]; then
   mv "$HOME"/dotfiles/dotcrap "$HOME"/dotfiles/zsh/.config/zsh/_dotcrap
 fi
 
+if [ ! -f "$HOME"/.zshenv ]; then
+  cat > "$HOME"/.zshenv <<EOF
+  ZDOTDIR=$HOME/.config/zsh
+  source $ZDOTDIR/.zshrc
+EOF
+fi
+
 if test "$(command -v stow)"
 then
   fancy_echo "Symlinking dotfiles"
   stow bin
   stow git
+  stow karabiner
   stow nvim
   stow tmux
   stow zsh
-  stow gnupg
+fi
+
+# Python neovim prerequisites for plugins
+if test "$(command -v python3)"
+then
+  pip3 install --user pynvim
 fi
 
 # vim-plug

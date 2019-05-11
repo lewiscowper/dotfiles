@@ -37,8 +37,7 @@ setw -g window-status-format '#(inactive-window)'
 setw -g window-status-current-format '#(current-window)'
 
 # colorize messages in the command line
-set -g message-bg blue
-set -g message-fg white
+set -g message-style bg=blue,fg=white
 
 # Set term correctly
 set -g default-terminal 'tmux-256color'
@@ -75,10 +74,8 @@ bind l select-pane -R
 
 # Style panes/splits
 
-set -g pane-border-bg default
-set -g pane-border-fg black
-set -g pane-active-border-bg default
-set -g pane-active-border-fg blue
+set -g pane-border-style bg=default,fg=black
+set -g pane-active-border-style bg=default,fg=blue
 set -g display-panes-colour black
 set -g display-panes-active-colour brightblack
 
