@@ -117,6 +117,7 @@ then
   stow bin
   stow git
   stow karabiner
+  stow iterm2
   stow nvim
   stow tmux
   stow zsh

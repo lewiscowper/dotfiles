@@ -1,7 +1,6 @@
 [user]
 	email = lewis.cowper@googlemail.com
 	name = Lewis Cowper
-	signingkey = 203D84CDD64D6CB0
 
 [editor]
   editor = nvim
@@ -76,14 +75,11 @@
   remote = origin
   merge = refs/heads/master
 
-[pager]
-  diff = diff-so-fancy | less --tabs=1,5 -RFX
-  show = diff-so-fancy | less --tabs=1,5 -RFX
-
 [commit]
 	gpgsign = false
 [core]
 	excludesfile = /Users/lewis/.config/git/globalignore
+	pager = delta --dark
 [diff]
   compactionHeuristic = true
   algorithm = patience

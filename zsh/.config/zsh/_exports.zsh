@@ -10,9 +10,6 @@ export EDITOR=nvim
 export LANG='en_GB.UTF-8';
 export LC_ALL='en_GB.UTF-8';
 
-# Don't clear the screen after quitting a manual page
-export MANPAGER='less -X';
-
 # Prevent percentage showing up if output doesn't end with a newline.
 PROMPT_EOL_MARK=''
 

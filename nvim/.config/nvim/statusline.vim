@@ -43,34 +43,36 @@ function! ReadOnly() abort
 	endif
 endfunction
 
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  return '∙ ' . join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
 endfunction
 
 set statusline=
 set statusline+=%{ChangeStatuslineColor()}
 set statusline+=%<
-set statusline+=%f
+set statusline+=\ %n
+set statusline+=\ —
+set statusline+=\ %{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}
+set statusline+=\ ∙
+set statusline+=\ %f
+set statusline+=\ %{StatusDiagnostic()}
 set statusline+=%=
 set statusline+=\ ∙
 set statusline+=\ ∙
-set statusline+=\ ∙
-set statusline+=\ %{FugitiveHead()}
-set statusline+=\ ∙
-set statusline+=\ %{LinterStatus()}
 set statusline+=\ ∙
 set statusline+=\ %{strftime('%R',getftime(expand('%')))}
 set statusline+=\ %{ReadOnly()}
 set statusline+=\ ∙
 set statusline+=\ ∙
 set statusline+=\ ∙
+set statusline+=" "
 

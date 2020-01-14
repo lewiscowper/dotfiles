@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
 
-echo "#(main-color) #(color-square wifi-name) #(color-square time) #(color-square battery) #(color-square bt-headphones) #(color-square session-name) "
+echo "\
+ #(main-color)\
+ #(color-square kubernetes)\
+ #(color-square wifi-name)\
+ #(color-square time)\
+ #(color-square bt-headphones)\
+ #(color-square battery)\
+ #(color-square session-name)\
+ "
 exit 0

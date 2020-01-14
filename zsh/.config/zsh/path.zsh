@@ -19,6 +19,12 @@ export PATH="$HOME/bin:$PATH"
 # Add custom tmux scripts to path
 export PATH="$HOME/bin/tmux:$PATH"
 
+# Add custom work scripts to path
+export PATH="$HOME/bin/work:$PATH"
+
+# Add custom kubectl scripts to path
+export PATH="$HOME/bin/kubectl:$PATH"
+
 # Gopath variable because I want to put it inside dev
 export GOPATH="$DEV_DIR/go"
 export GOBIN="$GOPATH/bin"
@@ -28,3 +34,6 @@ export PATH="$GOBIN:$PATH"
 
 # Add ncurses from brew to the path
 export PATH="/usr/local/opt/ncurses/bin:$PATH"
+
+# Add helm@2 from brew ahead of helm@3
+export PATH="/usr/local/opt/helm@2/bin:$PATH"

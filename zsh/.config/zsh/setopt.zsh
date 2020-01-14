@@ -12,7 +12,8 @@ setopt interactive_comments
 # History
 
 # Allow multiple terminal sessions to all append to one zsh command history
-setopt append_history
+setopt inc_append_history
+setopt share_history
 
 # Remove extra blanks from each command line being added to history
 setopt hist_reduce_blanks

@@ -1,3 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-system_profiler SPBluetoothDataType | awk "/Lewis/{p=0} /Lewis\\'s Airpods/{p=1} p" | \grep -q "Connected: Yes"
+system_profiler SPBluetoothDataType 2&> /dev/null | awk '/Address: 9C-64-8B-7E-EE-F8/,/Class of Device:/' | grep -q 'Connected: Yes'
+

@@ -22,6 +22,80 @@ _has() {
 # cp and mv are now "interactive", aka will prompt before overwrite
 alias cp='cp -i'
 alias mv='mv -i'
+alias ls='gls --color -h --group-directories-first'
+
+if _has git; then
+  alias g='git'
+  alias ga='git add'
+  alias gb='git branch'
+  alias gc='git commit'
+  alias gcl='git clone'
+  alias gcm='git commit --message'
+  alias gco='git checkout'
+  alias gcob='git checkout -b'
+  alias gcom='git checkout master'
+  alias gd='git diff'
+  alias gi='git init'
+  alias glg='git log --graph --oneline --decorate --all'
+  alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
+  alias gp='git pull'
+  alias gpom='git pull origin master'
+  alias gr='git rebase'
+  alias gs='git status'
+  alias gst='git stash'
+  alias gsta='git stash apply'
+fi
+
+# Kubernetes cli
+# https://github.com/kubernetes/kubernetes
+#
+# brew install kubernetes-cli
+if _has kubectl; then
+  alias k='kubectl'
+  alias kg='kubectl get'
+  alias kgp='kubectl get pods'
+  alias kgd='kubectl get deploy'
+  alias kgi='kubectl get ingress'
+  alias kgs='kubectl get svc'
+  alias kgsc='kubectl get secret -o yaml'
+  alias kgst='kubectl get statefulsets.apps'
+  alias kgr='kubectl get rs'
+  alias kgpv='kubectl get pvc'
+  alias kd='kubectl delete'
+  alias kdp='kubectl delete pods'
+  alias kdi='kubectl delete ingress'
+  alias kdd='kubectl delete deploy'
+  alias kds='kubectl delete svc'
+  alias kdsc='kubectl delete secret'
+  alias kdst='kubectl delete statefulsets.apps'
+  alias kdr='kubectl delete rs'
+  alias kdpv='kubectl delete pvc'
+  alias ke='kubectl exec -it'
+  alias kl='kubectl logs'
+  alias klf='kubectl logs -f'
+  alias kv='kubectl describe'
+  alias kvp='kubectl describe pods'
+  alias kcn='kubectl config set-context $(kubectl config current-context) --namespace'
+  alias kpf='kubectl port-forward'
+fi
+
+if _has helm; then
+  alias h='helm'
+  alias ht='helm template -f'
+  alias hl='helm lint'
+  alias hru='helm repo update'
+  alias hdu='helm dep update'
+  alias helm2='/usr/local/opt/helm@2/bin/helm'
+fi
+
+if _has ansible; then
+  alias avd='ansible-vault decrypt'
+  alias ave='ansible-vault encrypt'
+fi
+
+if _has curl; then
+  alias weather='curl "wttr.in/?Q0"'
+fi
 
 # Lovely ls replacement that adds colours and icons and so on
 # https://github.com/athityakumar/colorls
@@ -38,7 +112,7 @@ fi
 #
 # brew install bat
 if _has bat; then
-  alias cat='bat'
+  alias cat='PAGER=less bat'
 fi
 
 # Tmux manages my workflow and sessions

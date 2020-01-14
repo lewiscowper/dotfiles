@@ -9,13 +9,13 @@ bind C-a send-prefix
 bind r source-file ~/.config/tmux/conf\; display 'Reloaded'
 
 # set large history limit
-set-option -g history-limit 10000
+set-option -g history-limit 50000
 
 # set faster escape sequences so tmux is more responsive
 set -sg escape-time 10
 
-# update status bar every 5 seconds
-set -g status-interval 5
+# update status bar every 10 seconds
+set -g status-interval 10
 
 # set window numbering to 1 instead of 0 by default
 set -g base-index 1
@@ -50,7 +50,7 @@ set-option -g default-command 'reattach-to-user-namespace -l $SHELL'
 set -g status-justify 'left'
 
 # Add magic focus events
-set -g focus-events on
+set -g focus-events off
 
 # show/hide status bar with shift+up/shift+down
 bind-key -n S-Down set -g status
@@ -82,6 +82,3 @@ set -g display-panes-active-colour brightblack
 # Activity monitoring
 setw -g monitor-activity off
 set -g visual-activity off
-
-# Set SSH_AUTH_SOCK to our symlink, as set in ~/.ssh/rc
-set-environment -g 'SSH_AUTH_SOCK' ~/.ssh/ssh_auth_sock

@@ -1,6 +1,9 @@
 *secrets*
 *dotcrap
-tmux/plugins/*
+tmux/.config/tmux/plugins/*
 nvim/.config/nvim/plugged*
 nvim/.config/nvim/autoload*
-
+*.zcompdump
+*.revolver
+*work*
+*automatic_backups*
