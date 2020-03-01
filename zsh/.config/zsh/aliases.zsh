@@ -112,7 +112,7 @@ fi
 #
 # brew install bat
 if _has bat; then
-  alias cat='PAGER=less bat'
+  alias cat='bat'
 fi
 
 # Tmux manages my workflow and sessions
