@@ -11,8 +11,6 @@ call plug#begin()
   " Colourscheme
   Plug 'arcticicestudio/nord-vim'
 
-  Plug 'airblade/vim-gitgutter'
-
   " This plugin saves me from my copy pasting woes
   Plug 'ConradIrwin/vim-bracketed-paste'
 
@@ -37,19 +35,6 @@ call plug#begin()
   Plug 'bling/vim-bufferline'
 
 call plug#end()
-
-" Always leave space for git-gutter (aka sign column)
-if exists('&signcolumn')  " Vim 7.4.2201
-  set signcolumn=yes
-else
-  let g:gitgutter_sign_column_always = 1
-endif
-
-" Use · instead of +/-
-let g:gitgutter_sign_added = '∙'
-let g:gitgutter_sign_modified = '∙'
-let g:gitgutter_sign_removed = '∙'
-let g:gitgutter_sign_modified_removed = '∙'
 
 let g:vim_markdown_frontmatter = 1
 
