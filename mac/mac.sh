@@ -13,10 +13,11 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "gibson"
-sudo scutil --set HostName "gibson"
-sudo scutil --set LocalHostName "gibson"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "gibson"
+sudo scutil --set ComputerName "FLC0068"
+sudo scutil --set HostName "FLC0068"
+sudo scutil --set LocalHostName "FLC0068"
+sudo defaults write
+/Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "FLC0068"
 
 # Disabling desktop icons
 defaults write com.apple.finder CreateDesktop -bool FALSE
