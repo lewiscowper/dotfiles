@@ -9,7 +9,13 @@
       }
     }
   },
-  "yaml.schemas": {
-    "Kubernetes": "helm/**/*.yaml"
+  "yaml": {
+    "schemaStore": {
+      "enable": "true"
+    },
+    "schemas": {
+      "kubernetes": "/*.yaml",
+      "http://json.schemastore.org/gitlab-ci": "/.gitlab-ci.yml"
+    }
   }
 }

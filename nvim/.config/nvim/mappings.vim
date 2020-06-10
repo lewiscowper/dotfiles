@@ -9,3 +9,5 @@ cmap w!! %!sudo tee > /dev/null %
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" make Y consistent with C and D.
+nnoremap Y y$
