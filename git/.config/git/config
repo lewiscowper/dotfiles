@@ -1,6 +1,7 @@
 [user]
 	email = lewis.cowper@googlemail.com
 	name = Lewis Cowper
+	email = lewis.cowper@finleap.com
 
 [editor]
   editor = nvim
@@ -14,6 +15,7 @@
   hist = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset [%an]' --abbrev-commit --date=relative
   ls = !git-ls
   gr = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
+  lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
   prune = fetch --prune
   # Because I constantly forget how to do this
   # https://git-scm.com/docs/git-fetch#git-fetch--p
@@ -102,3 +104,5 @@
 	user = lewiscowper
 [gpg]
 	program = gpg
+
+[url "git@gitlab.figo.systems:"] insteadOf = https://gitlab.figo.systems
