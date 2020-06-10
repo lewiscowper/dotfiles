@@ -60,32 +60,11 @@ then
   brew bundle --file="$HOME"/dotfiles/Brewfile
 fi
 
-update_shell() {
-  local shell_path;
-  shell_path="$(command -v zsh)"
-
-  if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-    fancy_echo "Adding '$shell_path' to /etc/shells"
-    sudo sh -c "echo $shell_path >> /etc/shells"
-  fi
-  sudo chsh -s "$shell_path" "$USER"
-}
-
-if [ "$SHELL" != "/bin/zsh" ]; then
-  fancy_echo "Changing your shell to zsh"
-  update_shell
-fi
-
-for dir in ".config" ".local" ".ssh" "dev" "media" "tmp" "docs" "bak" "sync"; do
+for dir in ".config" ".local" ".ssh" "dev" "media" "tmp" "docs" "bak"; do
   if [ ! -d "$HOME/$dir" ]; then
     mkdir "$HOME/$dir" && fancy_echo "Created $HOME/$dir"
   fi
 done
-
-if [ -d "$HOME/sync" ]; then
-  fancy_echo "Creating iCloud link in sync directory"
-  ln -s "$HOME"/Library/Mobile\ Documents/com~apple~CloudDocs/ "$HOME"/"$dir"/iCloud
-fi
 
 for dirName in "work" "personal"; do
   if [ ! -d "$HOME/dev/$dirName" ]; then
@@ -102,13 +81,6 @@ done
 if [ -f "$HOME"/dotfiles/dotcrap ]; then
   fancy_echo "Moving dotcrap into zsh config directory"
   mv "$HOME"/dotfiles/dotcrap "$HOME"/dotfiles/zsh/.config/zsh/_dotcrap
-fi
-
-if [ ! -f "$HOME"/.zshenv ]; then
-  cat > "$HOME"/.zshenv <<EOF
-  ZDOTDIR=$HOME/.config/zsh
-  source $ZDOTDIR/.zshrc
-EOF
 fi
 
 if test "$(command -v stow)"
