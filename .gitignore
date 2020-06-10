@@ -6,4 +6,5 @@ nvim/.config/nvim/autoload*
 *.zcompdump
 *.revolver
 *work*
+bin/bin/go/*
 *automatic_backups*
