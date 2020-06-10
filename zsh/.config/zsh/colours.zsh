@@ -64,3 +64,4 @@ export LSCOLORS='gxfxcxdxbxgegdabagacad'
 # Enable color in grep
 export GREP_COLOR='3;36'
 
+

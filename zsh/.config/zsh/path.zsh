@@ -1,39 +1,43 @@
 # Path modification
 
+# Use gnu versions of tools ahead of anything else
+PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+
 # Add brew files and other /usr/local/stuff to path
-export PATH="/usr/local/lib:/usr/local/bin:/usr/local/sbin:$PATH"
+PATH="/usr/local/lib:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # Add npm bin directory to path
-export PATH="$XDG_DATA_HOME/npm/bin:$PATH"
+PATH="$XDG_DATA_HOME/npm/bin:$PATH"
 
 # Add rust toolchain/cargo to path
-export PATH="$CARGO_HOME/bin:$PATH"
+PATH="$CARGO_HOME/bin:$PATH"
 
 # Add ruby toolchain to path
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="$GEM_HOME/bin:$PATH"
+PATH="/usr/local/opt/ruby/bin:$PATH"
+PATH="$GEM_HOME/bin:$PATH"
 
 # Add custom bin directories to path
-export PATH="$HOME/bin:$PATH"
+PATH="$HOME/bin:$PATH"
 
 # Add custom tmux scripts to path
-export PATH="$HOME/bin/tmux:$PATH"
+PATH="$HOME/bin/tmux:$PATH"
 
 # Add custom work scripts to path
-export PATH="$HOME/bin/work:$PATH"
+PATH="$HOME/bin/work:$PATH"
 
 # Add custom kubectl scripts to path
-export PATH="$HOME/bin/kubectl:$PATH"
+PATH="$HOME/bin/kubectl:$PATH"
 
-# Gopath variable because I want to put it inside dev
-export GOPATH="$DEV_DIR/go"
-export GOBIN="$GOPATH/bin"
+export GOPATH="$HOME/bin/go"
+export GOBIN="${GOPATH//://bin:}/bin"
 
 # Add that GOBIN directory to the path
-export PATH="$GOBIN:$PATH"
+PATH="$GOBIN:$PATH"
 
 # Add ncurses from brew to the path
-export PATH="/usr/local/opt/ncurses/bin:$PATH"
+PATH="/usr/local/opt/ncurses/bin:$PATH"
 
 # Add helm@2 from brew ahead of helm@3
-export PATH="/usr/local/opt/helm@2/bin:$PATH"
+PATH="/usr/local/opt/helm@2/bin:$PATH"
+
+export PATH

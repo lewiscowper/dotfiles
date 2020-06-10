@@ -34,6 +34,8 @@ if _has git; then
   alias gco='git checkout'
   alias gcob='git checkout -b'
   alias gcom='git checkout master'
+  alias gr='git restore'
+  alias grs='git restore --staged'
   alias gd='git diff'
   alias gi='git init'
   alias glg='git log --graph --oneline --decorate --all'
