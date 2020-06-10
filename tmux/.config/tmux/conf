@@ -60,6 +60,9 @@ bind-key -n S-Up set -g status
 bind-key -n S-Left previous-window
 bind-key -n S-Right next-window
 
+# Open new panes in current directory
+bind c new-window -c "#{pane_current_path}"
+
 # split panes using | and -
 bind | split-window -h
 bind - split-window -v
