@@ -85,6 +85,7 @@ if _has kubectl; then
   alias kvp='kubectl describe pods'
   alias kcn='kubectl config set-context $(kubectl config current-context) --namespace'
   alias kpf='kubectl port-forward'
+  alias kga='kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --ignore-not-found'
 fi
 
 if _has helm; then
