@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
+# Only show kubernetes context/namespace in work sessions
+if [[ $(tmux display-message -p "#S") == work* ]]; then
+  kubernetes="#(color-square kubernetes)"
+else
+  unset kubernetes
+fi
+
 echo "#(main-color)\
- #(color-square kubernetes)\
+ $kubernetes\
+ #(color-square tmux-docker)\
  #(color-square wifi-name)\
  #(color-square time)\
  #(color-square battery)\
