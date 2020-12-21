@@ -1,6 +1,6 @@
-# little editor shorthands, e for edit directly in terminal, g for "graphically edit"
-alias e="$EDITOR"
-alias vim="nvim"
+# little editor shorthands, e for edit directly in terminal, g for 'graphically edit'
+alias e='$EDITOR'
+alias vim='nvim'
 
 # While I remember this from 'eXtract Ze Files', this can be handy
 alias untar='tar xvf'
@@ -14,15 +14,19 @@ alias procs='ps aux | grep -i'
 # reload shell config
 alias sz='source $XDG_CONFIG_HOME/zsh/.zshrc'
 
+if _has pup; then
+  alias excuse='curl -s http://programmingexcuses.com/ | pup --plain "body .wrapper center a text{}"'
+fi
+
 # Handy function to determine if a command is installed
 _has() {
   command -v $1>/dev/null 2>&1
 }
 
-# cp and mv are now "interactive", aka will prompt before overwrite
+# cp and mv are now 'interactive', aka will prompt before overwrite
 alias cp='cp -i'
 alias mv='mv -i'
-alias ls='gls --color -h --group-directories-first'
+alias ls='exa --icons --group-directories-first'
 
 if _has git; then
   alias g='git'
@@ -41,8 +45,10 @@ if _has git; then
   alias glg='git log --graph --oneline --decorate --all'
   alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
   alias gp='git pull'
-  alias gpom='git pull origin master'
-  alias gr='git rebase'
+  alias gpoh='git pull origin HEAD'
+  alias gr='git restore'
+  alias gri='git rebase -i'
+  alias grs='git restore --staged'
   alias gs='git status'
   alias gst='git stash'
   alias gsta='git stash apply'
@@ -123,11 +129,11 @@ fi
 # brew install tmux
 if _has tmux; then
   # Shorthand to attach to a session by tag, e.g. ta <tag>
-  alias ta="tmux attach -t"
+  alias ta='tmux attach -t'
   # Shorthand to create a new session by name, e.g. tn <name>
-  alias tn="tmux new-session -s"
+  alias tn='tmux new-session -s'
   # Shorthand to list all sessions
-  alias tls="tmux list-sessions"
+  alias tls='tmux list-sessions'
 fi
 
 # Docker runs docker containers, remarkable that
@@ -176,3 +182,53 @@ if _has neomutt; then
   # Sets an alias that moves the config directory out of ~/.subversion
   alias mutt='neomutt'
 fi
+
+# Kubernetes cli
+# https://github.com/kubernetes/kubernetes
+#
+# brew install kubernetes-cli
+if _has kubectl; then
+  alias k='kubectl'
+  alias kg='kubectl get'
+  alias kgp='kubectl get pods'
+  alias kgd='kubectl get deploy'
+  alias kgi='kubectl get ingress'
+  alias kgs='kubectl get svc'
+  alias kgsc='kubectl get secret -o yaml'
+  alias kgst='kubectl get statefulsets.apps'
+  alias kgr='kubectl get rs'
+  alias kgpv='kubectl get pvc'
+  alias kd='kubectl delete'
+  alias kdp='kubectl delete pods'
+  alias kdi='kubectl delete ingress'
+  alias kdd='kubectl delete deploy'
+  alias kds='kubectl delete svc'
+  alias kdsc='kubectl delete secret'
+  alias kdst='kubectl delete statefulsets.apps'
+  alias kdr='kubectl delete rs'
+  alias kdpv='kubectl delete pvc'
+  alias ke='kubectl exec -it'
+  alias kl='kubectl logs'
+  alias klf='kubectl logs -f'
+  alias kv='kubectl describe'
+  alias kvp='kubectl describe pods'
+  alias kcn='kubectl config set-context $(kubectl config current-context) --namespace'
+  alias kpf='kubectl port-forward'
+fi
+
+if _has helm; then
+  alias h='helm'
+  alias ht='helm template -f'
+  alias hl='helm lint'
+  alias hru='helm repo update'
+  alias hdu='helm dep update'
+fi
+
+if _has prometheus; then
+  alias prom='prometheus --config.file=/usr/local/etc/prometheus.yml'
+fi
+
+if _has grafana-server; then
+  alias graf='grafana-server --config=/usr/local/etc/grafana/grafana.ini --homepath /usr/local/share/grafana --packaging=brew cfg:default.paths.logs=/usr/local/var/log/grafana cfg:default.paths.data=/usr/local/var/lib/grafana cfg:default.paths.plugins=/usr/local/var/lib/grafana/plugins'
+fi
+
