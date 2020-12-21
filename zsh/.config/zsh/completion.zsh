@@ -1,6 +1,8 @@
 # Change location of zsh completion dump file
 COMPDUMPFILE="$XDG_DATA_HOME/zsh/zcompdump"
 
+export FIGNORE=Desktop:Documents:Downloads:Library:Movies:Music:Pictures:Public
+
 autoload -Uz compinit
 if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' $COMPDUMPFILE) ]; then
   compinit -d $COMPDUMPFILE

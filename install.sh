@@ -60,22 +60,37 @@ then
   brew bundle --file="$HOME"/dotfiles/Brewfile
 fi
 
-for dir in ".config" ".local" ".ssh" "dev" "desk" "media"; do
+for dir in ".config" ".local" ".ssh" "dev" "desk" "files"; do
   if [ ! -d "$HOME/$dir" ]; then
     mkdir "$HOME/$dir" && fancy_echo "Created $HOME/$dir"
   fi
 done
 
-for dirName in "audio" "images" "video"; do
-  if [ ! -d "$HOME/media/$dirName" ]; then
-    mkdir "$HOME/media/$dirName" && fancy_echo "Created $HOME/media/$dirName"
+for dirName in "audio" "images" "video" "sync"; do
+  if [ ! -d "$HOME/files/$dirName" ]; then
+    mkdir "$HOME/files/$dirName" && fancy_echo "Created $HOME/files/$dirName"
   fi
 done
 
 if [ -f "$HOME"/dotfiles/dotcrap ]; then
-  fancy_echo "Moving dotcrap into zsh config directory"
-  mv "$HOME"/dotfiles/dotcrap "$HOME"/dotfiles/zsh/.config/zsh/_dotcrap
+  fancy_echo "Linking dotcrap into zsh config directory"
+  ln -s "$HOME"/dotfiles/zsh/.config/zsh/_dotcrap "$HOME"/dotfiles/dotcrap
 fi
+
+fancy_echo "Hiding capitalised special directories from Finder"
+chflags hidden "$HOME"/Desktop "$HOME"/Documents "$HOME"/Downloads "$HOME"/Library
+chflags hidden "$HOME"/Movies "$HOME"/Music "$HOME"/Pictures "$HOME"/Public
+
+fancy_echo "Symlinking Desktop to desk"
+sudo rm -rf "$HOME"/Desktop
+ln -s desk "$HOME"/Desktop
+
+fancy_echo "Symlinking Downloads to desk"
+sudo rm -rf "$HOME"/Downloads
+ln -s desk "$HOME"/Downloads
+
+fancy_echo "Symlinking sync to iCloud"
+ln -s sync "$HOME"/Library/Mobile Documents/com~apple~CloudDocs
 
 if test "$(command -v stow)"
 then

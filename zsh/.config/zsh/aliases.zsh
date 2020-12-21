@@ -26,7 +26,7 @@ _has() {
 # cp and mv are now 'interactive', aka will prompt before overwrite
 alias cp='cp -i'
 alias mv='mv -i'
-alias ls='exa --icons --group-directories-first'
+alias ls='exa --icons --group-directories-first -I "Applications|Desktop|Documents|Downloads|Library|Movies|Music|Pictures|Public"'
 
 if _has git; then
   alias g='git'
