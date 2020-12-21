@@ -10,6 +10,7 @@
   # Show verbose output about tags, branches or remotes
   tags = tag -l
   branches = branch -a
+  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
   remotes = remote -v
   # Pretty log output
   hist = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset [%an]' --abbrev-commit --date=relative
@@ -48,6 +49,8 @@
 
   code-changes = "!git log --format=format: --name-only | egrep -v '^$' | sort | uniq -c | sort -rg | head -10"
   cc = "!git code-changes"
+
+  wip = for-each-ref --sort='-authordate:iso8601' --count 20 --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 [merge]
   conflictstyle = diff3
   # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
@@ -83,8 +86,9 @@
 [commit]
 	gpgsign = false
 [core]
-	excludesfile = /Users/lewis/.config/git/globalignore
+	excludesfile = ~/.config/git/globalignore
 	pager = delta --dark
+	attributesfile = ~/.config/git/attributes
 [diff]
   compactionHeuristic = true
   algorithm = patience
