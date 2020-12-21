@@ -60,15 +60,9 @@ then
   brew bundle --file="$HOME"/dotfiles/Brewfile
 fi
 
-for dir in ".config" ".local" ".ssh" "dev" "media" "tmp" "docs" "bak"; do
+for dir in ".config" ".local" ".ssh" "dev" "desk" "media"; do
   if [ ! -d "$HOME/$dir" ]; then
     mkdir "$HOME/$dir" && fancy_echo "Created $HOME/$dir"
-  fi
-done
-
-for dirName in "work" "personal"; do
-  if [ ! -d "$HOME/dev/$dirName" ]; then
-    mkdir "$HOME/dev/$dirName" && fancy_echo "Created $HOME/dev/$dirName"
   fi
 done
 
