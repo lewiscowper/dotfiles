@@ -6,6 +6,8 @@ endif
 set number
 set relativenumber
 
+set signcolumn=yes
+
 " Only care about case if it looks like that's what is wanted
 set ignorecase
 set smartcase

@@ -64,13 +64,16 @@ set statusline+=\ —
 set statusline+=\ %{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}
 set statusline+=\ ∙
 set statusline+=\ %f
-set statusline+=\ %{StatusDiagnostic()}
+set statusline+=\ %m
+set statusline+=\ ∙
+set statusline+=\ %{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%=
 set statusline+=\ ∙
 set statusline+=\ ∙
 set statusline+=\ ∙
 set statusline+=\ %{strftime('%R',getftime(expand('%')))}
 set statusline+=\ %{ReadOnly()}
+set statusline+=\ %Y
 set statusline+=\ ∙
 set statusline+=\ ∙
 set statusline+=\ ∙

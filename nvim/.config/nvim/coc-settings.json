@@ -9,13 +9,7 @@
       }
     }
   },
-  "yaml": {
-    "schemaStore": {
-      "enable": "true"
-    },
-    "schemas": {
-      "kubernetes": "/*.yaml",
-      "http://json.schemastore.org/gitlab-ci": "/.gitlab-ci.yml"
-    }
+  "yaml.schemas": {
+    "http://json.schemastore.org/gitlab-ci": "/.gitlab-ci.yml"
   }
 }

@@ -20,6 +20,9 @@ call plug#begin()
   " Highlight (and allow deletion of) trailing whitespace
   Plug 'ntpeters/vim-better-whitespace'
 
+  " Highlight on yank to add feedback of what has been yanked
+  Plug 'machakann/vim-highlightedyank'
+
   " Insert mode autocompletion for punctuation that comes in pairs!
   Plug 'Raimondi/delimitMate'
 
