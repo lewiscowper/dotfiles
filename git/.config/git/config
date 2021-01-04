@@ -1,7 +1,6 @@
 [user]
 	email = lewis.cowper@googlemail.com
 	name = Lewis Cowper
-	email = lewis.cowper@finleap.com
 
 [editor]
   editor = nvim
